@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -13,12 +15,17 @@
         <h2>Login</h2>
         <form method="post">
             {% csrf_token %}
-            {{form.as_p}}
+            {% for field in form %}
+                <div class="form-field">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>  <!-- Left-aligned label -->
+                    {{ field }}  <!-- Render the input field -->
+                    {% if field.errors %}
+                        <div class="error">{{ field.errors }}</div> <!-- Optional: Show errors if any -->
+                    {% endif %}
+                </div>
+            {% endfor %}
             <button type="submit" class="login-btn">Log In</button>
         </form>
-        <a href="{% url 'landing_page' %}">Back</a>
-        
     </div>
 </body>
 </html>
-

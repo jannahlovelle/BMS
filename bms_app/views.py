@@ -8,9 +8,6 @@ from bms_app.models import Bus, Employee, Schedule, UserProfile, Repair
 from .forms import BusForm, EmployeeForm, LoginForm, RepairForm, ScheduleForm, UserPasswordChangeForm, UserProfileForm
 
 # Views
-def landing_page(request):
-    return render(request, 'landing_page.html')
-
 
 def user_login(request):
     if request.method == 'POST':
@@ -26,7 +23,7 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('landing_page')
+    return redirect('login')
 
 
 @login_required

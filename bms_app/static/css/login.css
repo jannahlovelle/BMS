@@ -1,0 +1,122 @@
+/* Body styling */
+body {
+  background-image: url('/static/images/WELCOME!!2.jpg'); 
+  background-size: cover;           /* Ensures the image covers the entire background area proportionally */
+  background-repeat: no-repeat;     /* Prevents the image from repeating */
+  background-position: center;      /* Centers the image */
+  height: 100vh;
+  display: flex;                    /* Enables flexbox */
+  justify-content: flex-end;        /* Float the container to the right */
+  align-items: center;              /* Centers vertically */
+  text-align: center;               /* Centers text inside the element */
+  color: black;                     /* Text color */
+  font-family: 'Raleway', sans-serif; /* Font style */
+  position: relative;               /* For overlay positioning */
+  overflow: hidden;                 /* Hide Scroll Bars */
+}
+
+/* Container styling */
+.login-container {
+  position: relative;
+  margin: 0 200px; 
+  margin-right: 150px;
+  width: 400px;
+  height: auto; /* Allow dynamic height based on content */
+  padding: 30px 25px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  z-index: 2; /* Position above the overlay */
+}
+
+/* Form header styling */
+.login-container h2 {
+  font-size: 2em;
+  color: black;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Input field styling */
+.login-container input[type="text"], 
+.login-container input[type="password"] {
+  width: 90%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1em;
+  box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Input field focus effect */
+.login-container input[type="text"]:focus, 
+.login-container input[type="password"]:focus {
+  outline: none;
+  border-bottom: 2px solid #4caf50; /* Green color on focus */
+  transform: translateY(-4px);
+  box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Button styling */
+.login-btn {
+  width: 90%;
+  height: 50px;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.login-btn:hover {
+  background: linear-gradient(to right, #4caf50, #2d98da); /* Gradient color change */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  transform: translateY(-3px);
+}
+
+/* Register link styling */
+.login-container p {
+  margin: 20px 0 0;
+  color: #fff;
+  font-size: 0.9em;
+}
+
+.login-container a {
+  color: #ff5e57;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.login-container a:hover {
+  color: #ff2e63;
+  text-decoration: underline;
+}
+
+/* Label styling */
+.login-container label {
+  display: block;      /* Ensure the label takes up full width */
+  text-align: left;   /* Aligns the text to the left */
+  margin-bottom: 5px; /* Adds some space below the label */
+  font-weight: normal;  /* Optional: Makes the label text bold */
+  color: #3f3f3f;        /* Optional: Change label color if needed */
+}
