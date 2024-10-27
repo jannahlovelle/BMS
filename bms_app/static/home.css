@@ -1,0 +1,133 @@
+/* General page styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f4f8;
+}
+
+/* Navbar styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 15px 30px;  /* Increased padding */
+    border-bottom: 1px solid #ddd;
+}
+
+.navbar .logo img {
+    width: 60px;  /* Slightly larger logo */
+}
+
+.nav-links a {
+    margin: 0 20px;  /* Increased spacing */
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 18px;
+    transition: color 0.3s;  /* Transition effect on hover */
+}
+
+.nav-links a:hover {
+    color: #2874d1;  /* Hover effect */
+}
+
+.profile img {
+    width: 45px;  /* Adjusted profile image size */
+    border-radius: 50%;
+}
+
+/* Tabs styling */
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;  /* Increased margin */
+}
+
+.tab-btn {
+    background-color: #2874d1;
+    color: white;
+    padding: 12px 25px;  /* Increased padding */
+    border: none;
+    cursor: pointer;
+    margin-right: 15px;  /* Increased spacing */
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s;  /* Transition effect */
+}
+
+.tab-btn.active {
+    background-color: #e03e3e;
+}
+
+.tab-btn:hover {
+    background-color: #1e5faa;
+}
+
+/* Section styles */
+.schedule-section, .repair-section {
+    margin: 30px;  /* Increased margin for sections */
+}
+
+/* Add button */
+.add-btn {
+    background-color: #2874d1;
+    color: white;
+    padding: 12px 25px;  /* Increased padding */
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;  /* Transition effect */
+    margin-bottom: 20px;  /* Spacing below the button */
+}
+
+.add-btn:hover {
+    background-color: #1e5faa;
+}
+
+/* Table styles */
+.bus-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);  /* Enhanced shadow */
+    margin-top: 20px;  /* Added margin above the table */
+}
+
+.bus-table th, .bus-table td {
+    padding: 15px 25px;  /* Increased padding for cells */
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.bus-table th {
+    background-color: #f4f7fc;
+    font-weight: bold;
+    border-top-left-radius: 10px;  /* Rounded corners */
+    border-top-right-radius: 10px;  /* Rounded corners */
+}
+
+/* Status styles */
+.status.in-transit {
+    color: green;
+    font-weight: bold;
+}
+
+.status.under-maintenance {
+    color: red;
+    font-weight: bold;
+}
+
+.status.standby {
+    color: #EBAA04;
+    font-weight: bold;
+}
+
+/* Plate number styling */
+.plate-number {
+    font-weight: bold;
+    font-size: 16px;  /* Increased font size for emphasis */
+}

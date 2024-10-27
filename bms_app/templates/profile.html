@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        /* General styles for the page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px; /* Padding for the body */
+            background-color: #f0f4f8; /* Light background */
+        }
+
+        /* Container for the profile section */
+        .container {
+            max-width: 600px; /* Limit the width of the container */
+            margin: 0 auto; /* Center the container */
+            padding: 20px; /* Padding for the container */
+            background-color: #ffffff; /* White background for the profile */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        }
+
+        /* Heading styles */
+        h1, h2 {
+            text-align: center; /* Centered heading */
+            color: #333; /* Dark text color */
+        }
+
+        /* Profile picture styles */
+        img {
+            display: block; /* Center the image */
+            margin: 0 auto; /* Auto margin for centering */
+            border-radius: 50%; /* Circular profile picture */
+            border: 2px solid #ddd; /* Light gray border */
+        }
+
+        /* Form styles */
+        form {
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            margin-top: 20px; /* Space above the form */
+        }
+
+        /* Input fields */
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            margin: 10px 0; /* Space between inputs */
+            padding: 10px; /* Padding inside input fields */
+            border: 1px solid #ddd; /* Light gray border */
+            border-radius: 4px; /* Rounded corners */
+            font-size: 16px; /* Font size */
+        }
+
+        /* Button styles */
+        button {
+            padding: 10px 15px; /* Button padding */
+            background-color: #2874d1; /* Primary color */
+            color: white; /* White text color */
+            border: none; /* No border */
+            border-radius: 4px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor */
+            font-size: 16px; /* Font size */
+            margin-top: 10px; /* Space above the button */
+        }
+
+        /* Button hover effect */
+        button:hover {
+            background-color: #1e5faa; /* Darker shade on hover */
+        }
+
+        /* Back link styling */
+        a {
+            display: block; /* Block display for spacing */
+            text-align: center; /* Center link */
+            margin-top: 20px; /* Space above link */
+            color: #2874d1; /* Primary color */
+            text-decoration: none; /* No underline */
+        }
+
+        /* Back link hover effect */
+        a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Profile</h1>
+
+        {% if profile.profile_picture %}
+            <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" width="150">
+        {% else %}
+            <p>No profile picture available.</p>
+        {% endif %}
+
+        <h2>Edit Profile</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            <button type="submit" name="update_profile">Update Profile</button>
+        </form>
+
+        <a href="{% url 'home_page' %}">Back to Home</a>  
+    </div>
+</body>
+</html>

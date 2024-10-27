@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+</head>
+<body>
+    <!-- Navbar Section -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="Logo">
+        </div>
+        <div class="nav-links">
+            <a href="{% url 'bus_list' %}">Buses</a>
+            <a href="{% url 'employee_list' %}">Employees</a>
+        </div>
+        <div class="profile">
+            <a href="{% url 'profile' %}">
+                <img src="{% static 'images/profile-icon.png' %}" alt="Profile">
+            </a>
+            <a href="{% url 'logout' %}">Log Out</a>
+        </div>
+    </div>
+
+
+    <!-- Tab Section -->
+    <div class="tabs">
+        
+        <a href="{% url 'bus_list' %}"><button class="tab-btn">Buses</button></a>
+        <a href="{% url 'schedule_list' %}"><button class="tab-btn">Bus Schedules</button></a>
+        <a href="{% url 'repair_list' %}"><button class="tab-btn active">Active Repairs</button></a>
+        
+    </div>
+
+    <div class="repair-section">
+        <a href="{% url 'add_repair' %}">
+            <button class="add-btn">Add New Repair +</button>
+        </a>
+        <table class="bus-table">
+            <thead>
+                <tr>
+                    <th>Plate Number</th>
+                    <th>Model</th>
+                    <th>Repair Desc.</th>
+                    <th>Start Date</th>
+                    <th>Est. Completion</th>
+                    <th>Status</th>
+                    <th>Employee</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for repair in repairs %}
+                    <tr>
+                        <td>{{repair.bus.plate_number}}</td>
+                        <td>{{repair.bus.model}}</td>
+                        <td>{{ repair.repair_desc }}</td>
+                        <td>{{ repair.start_date }}</td>
+                        <td>{{ repair.est_completion }}</td>
+                        <td>{{ repair.status }}</td>
+                        <td>{{ repair.employee.first_name }} {{ repair.employee.last_name }}</td>
+                        <td>
+                            <a href="{% url 'edit_repair' repair.pk %}">Edit</a> | 
+                            <a href="{% url 'delete_repair' repair.pk %}">Delete</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="8">No repairs found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

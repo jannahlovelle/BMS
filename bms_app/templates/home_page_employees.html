@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home.css' %}">  <!-- Link to your CSS file -->
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="Logo">
+        </div>
+        <div class="nav-links">
+            <a href="{% url 'bus_list' %}">Buses</a>
+            <a href="{% url 'employee_list' %}">Employees</a>
+        </div>
+        <div class="profile">
+            <a href="{% url 'profile' %}">
+                <img src="{% static 'images/profile-icon.png' %}" alt="Profile">
+            </a>
+            <a href="{% url 'logout' %}">Log Out</a>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="employee-section">
+        <a href="{% url 'add_employee' %}">
+            <button class="add-btn">Add New Employee +</button>
+        </a>
+        
+        <table class="bus-table">  <!-- Use the bus-table class for styling -->
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Job Title</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in employees %}
+                    <tr>
+                        <td>
+                            {% if employee.photo %}
+                                <img src="{{ employee.photo.url }}" alt="{{ employee.first_name }} {{ employee.last_name }}" style="width: 50px; height: auto;">
+                            {% else %}
+                                No photo found.
+                            {% endif %}
+                        </td>
+                        <td>{{ employee.first_name }}</td>
+                        <td>{{ employee.last_name }}</td>
+                        <td>{{ employee.email }}</td>
+                        <td>{{ employee.job_title }}</td>
+                        <td>
+                            <a href="{% url 'edit_employee' employee.employee_id %}">Edit</a> | 
+                            <a href="{% url 'delete_employee' employee.employee_id %}">Delete</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6">No employees found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

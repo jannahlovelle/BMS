@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Landing Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'landing_page.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="content">
+        <h1>Welcome to your Bus Management App</h1>
+        <a href="{% url 'login' %}">Log In</a>
+        <!-- <a href="{% url 'user_list' %}">Users</a> -->
+    </div>
+</body>
+</html>

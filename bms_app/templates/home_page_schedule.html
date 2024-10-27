@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+</head>
+<body>
+    <!-- Navbar Section -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="Logo">
+        </div>
+        <div class="nav-links">
+            <a href="{% url 'bus_list' %}">Buses</a>
+            <a href="{% url 'employee_list' %}">Employees</a>
+        </div>
+        <div class="profile">
+            <a href="{% url 'profile' %}">
+                <img src="{% static 'images/profile-icon.png' %}" alt="Profile">
+            </a>
+            <a href="{% url 'logout' %}">Log Out</a>
+        </div>
+    </div>
+
+    <!-- Tab Section -->
+    <div class="tabs">
+        <a href="{% url 'bus_list' %}"><button class="tab-btn">Buses</button></a>
+        <a href="{% url 'schedule_list' %}"><button class="tab-btn active">Bus Schedules</button></a>
+        <a href="{% url 'repair_list' %}"><button class="tab-btn">Active Repairs</button></a>
+    </div>
+
+    <!-- Schedule Table -->
+    <div class="schedule-section">
+        <a href="{% url 'add_schedule' %}">
+            <button class="add-btn">Add New Schedule +</button>
+        </a>
+        <table class="bus-table">
+            <thead>
+                <tr>
+                    <th>Bus</th>
+                    <th>Model</th>
+                    <th>Route</th>
+                    <th>Departure Time</th>
+                    <th>Arrival Time</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for schedule in schedules %}
+                    <tr>
+                        <td>{{ schedule.bus.plate_number }}</td>
+                        <td>{{ schedule.bus.model }}</td>
+                        <td>{{ schedule.route }}</td>
+                        <td>{{ schedule.departure_time }}</td>
+                        <td>{{ schedule.arrival_time }}</td>
+                        <td>{{ schedule.get_status_display }}</td>
+                        <td>
+                            <a href="{% url 'edit_schedule' schedule.sched_id %}">Edit</a> | 
+                            <a href="{% url 'delete_schedule' schedule.sched_id %}">Delete</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="7">No schedules found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+body {
+    background-image: url("./images/hehe1.jpg");
+    background-size: cover;         /* Ensures the image covers the entire area */
+    background-repeat: no-repeat;   /* Prevents the image from repeating */
+    background-position: center;    /* Centers the image */
+    height: 100vh;
+    display: flex;                 /* Enables flexbox */
+    justify-content: center;       /* Centers horizontally */
+    align-items: center;           /* Centers vertically */
+    text-align: center;            /* Centers text inside the element */
+    color: white;                  /* Text color */
+    font-family: Arial, sans-serif; /* Font style */
+    position: relative;            /* For overlay positioning */
+    overflow: hidden;              /* Hide Scroll Bars */
+}
+
+.overlay {
+    position: fixed;               /* Use fixed to cover the whole viewport */
+    top: 0; left: 0; right: 0; bottom: 0; /* Cover entire viewport */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    z-index: 1;                   /* Overlay on top */
+}
+
+.login-container {
+    position: relative;
+    z-index: 2;
+    top: -40px;
+}
+
+h2 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 40px; /* Size 40 */
+    font-weight: 500; /* Medium weight */
+    line-height: 120%; /* Line height */
+    letter-spacing: -0.02em;
+    position: relative;
+    top: -80px; /* Adjust as needed */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+a {
+    display: inline-block; /* Make it behave like a button */
+    padding: 10px 25px; /* Adjust padding as needed */
+    background-color: darkred; /* Button color */
+    color: white; /* Text color */
+    border-radius: 25px; /* Corner radius */
+    text-decoration: none; /* Remove underline */
+    font-size: 10px; /* Adjust font size as needed */
+    margin-top: 15px; /* Spacing from other elements */
+}
+
+a:hover {
+    background-color: red; /* Darker red on hover */
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    border-radius: 25px; /* Corner radius */
+    padding: 10px; /* Adjust padding as needed */
+    font-size: 18px; /* Adjust font size as needed */
+    margin-bottom: 10px; /* Spacing between fields */
+    border: none; /* Remove default border */
+}
+
+input::placeholder {
+    color: #ccc; /* Placeholder text color */
+}
+
+.login-btn {
+    width: 100%; /* Maintain full width */
+    max-width: 400px; /* Set a maximum width to prevent stretching */
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+    padding: 10px;
+    background-color: darkred;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+}
+
+.login-btn:hover {
+    background-color: red;
+}

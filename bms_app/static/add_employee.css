@@ -1,0 +1,81 @@
+/* General styles for the page */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f4f8; /* Light background */
+}
+
+/* Container for the form */
+.container {
+    max-width: 800px;
+    margin: 50px auto; /* Centering the container */
+    padding: 20px;
+    background-color: #ffffff; /* White background for the form */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+/* Form heading */
+h2 {
+    text-align: center; /* Centered heading */
+    color: #333; /* Dark text color */
+}
+
+/* Styles for form elements */
+form {
+    display: flex;
+    flex-direction: column; /* Stacking elements vertically */
+}
+
+/* Input fields and select elements */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="file"],
+select,
+textarea {
+    margin: 10px 0; /* Space between inputs */
+    padding: 10px;
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+}
+
+/* Upload photo section */
+.upload-photo {
+    display: flex;
+    flex-direction: column; /* Stack label and button */
+    align-items: center; /* Center elements */
+}
+
+/* Button styles */
+button {
+    padding: 10px 15px; /* Button padding */
+    background-color: #2874d1; /* Primary color */
+    color: white; /* White text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+    font-size: 16px; /* Font size */
+    margin-top: 15px; /* Space above the button */
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #1e5faa; /* Darker shade on hover */
+}
+
+/* Back link styling */
+a {
+    display: block; /* Block display for spacing */
+    text-align: center; /* Center link */
+    margin-top: 20px; /* Space above link */
+    color: #2874d1; /* Primary color */
+    text-decoration: none; /* No underline */
+}
+
+/* Back link hover effect */
+a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
