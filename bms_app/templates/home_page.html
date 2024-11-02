@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BMS-MainPage</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <<link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
 <body>
     <!-- Navbar Section -->
@@ -30,6 +30,9 @@
         <a href="{% url 'bus_list' %}"><button class="tab-btn active">Buses</button></a>
         <a href="{% url 'schedule_list' %}"><button class="tab-btn">Bus Schedules</button></a>
         <a href="{% url 'repair_list' %}"><button class="tab-btn">Active Repairs</button></a>
+        <a href="{% url 'employee_schedule' %}">  
+            <button class="tab-btn">Employee Schedules</button> <!-- Link to employee schedule page -->
+        </a> <!-- Not Permanent kay sa Employee ni diri, subset dapat ni sa employee -->
     </div>
 
     <!-- Search and Add Section -->

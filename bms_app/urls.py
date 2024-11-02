@@ -34,6 +34,9 @@ urlpatterns = [
     path('schedules/', views.schedule_list, name='schedule_list'),  # Optional: Separate schedule list view
     path('repairs/', views.repair_list, name='repair_list'),  # Optional: Separate repair list view
     # Add other URL patterns as needed
+    # New Url's
+    path('employee_schedule/', views.employee_schedule_list, name='employee_schedule'),
+    path('add_employee_schedule/', views.add_employee_schedule, name='add_employee_schedule'),
 ]
 
 if settings.DEBUG:

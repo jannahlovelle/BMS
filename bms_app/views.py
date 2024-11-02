@@ -191,6 +191,41 @@ def delete_schedule(request, sched_id):
         return redirect('schedule_list')  # Redirect after deletion
     return render(request, 'confirm_delete_schedule.html', {'object': schedule})
 
+# Employee Sched
+#@login_required
+#def employee_schedule(request, employee_id):
+    employee = get_object_or_404(Employee, employee_id=employee_id, user=request.user)
+    schedules = Schedule.objects.filter(employee=employee)  # Assuming a foreign key in Schedule to Employee
+
+    context = {
+        'employee': employee,
+        'schedules': schedules,
+    }
+    return render(request, 'employee_schedule.html', context)
+
+# Employee Sched List
+@login_required
+def employee_schedule_list(request):
+    schedules = Schedule.objects.filter(bus__user=request.user)  # Adjust this if you want more filters
+    return render(request, 'employee_schedule_list.html', {
+        'schedules': schedules,
+    })
+
+# Add a employee sched
+@login_required
+def add_employee_schedule(request):
+    if request.method == "POST":
+        form = ScheduleForm(request.POST)
+        if form.is_valid():
+            form.save()  # Save the schedule without linking to an employee
+            return redirect('employee_schedule_list')  # Redirect to the schedule list
+    else:
+        form = ScheduleForm()  # Initialize empty form
+
+    return render(request, 'add_employee_schedule.html', {
+        'form': form,
+    })
+
 # Create a repair
 def add_repair(request):
     if request.method == 'POST':

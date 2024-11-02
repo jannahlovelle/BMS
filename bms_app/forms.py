@@ -65,3 +65,16 @@ class RepairForm(forms.ModelForm):
             'bus',
             'employee',  # Use 'employee' here, not 'employee_id'
         ]
+
+# It adds employee schedule
+class AddEmployeeScheduleForm(forms.ModelForm):
+    class Meta:
+        model = Schedule
+        fields = ['bus', 'route', 'departure_time', 'arrival_time', 'status']
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)  # Get the user from kwargs
+        super().__init__(*args, **kwargs)
+
+        # Limit choices for bus and employee to those related to the user
+        self.fields['bus'].queryset = Bus.objects.filter(user=user)
