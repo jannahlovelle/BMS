@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Employee List</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/home.css' %}">  <!-- Link to your CSS file -->
 </head>
 <body>
+    <!-- Navbar Section -->
     <div class="navbar">
         <div class="logo">
             <img src="{% static 'images/logo.png' %}" alt="Logo">
@@ -25,21 +26,21 @@
     </div>
 
     <div class="tabs">
-        <a href="{% url 'employee_schedule' %}">  
-            <button class="tab-btn">Employee Schedules</button> <!-- Link to employee schedule page -->
-        </a> <!-- Not Permanent kay sa Employee ni diri, subset dapat ni sa employee -->
+        <a href="{% url 'employee_list' %}"><button class="tab-btn active">Employees</button></a>
+        <a href="{% url 'employee_schedule' %}">
+            <button class="tab-btn">Employee Schedules</button>
+        </a>
     </div>
+
     <br>
     <br>
-    <br>
-    <br>
-    <br>
+
     <div class="employee-section">
         <a href="{% url 'add_employee' %}">
             <button class="add-btn">Add New Employee +</button>
         </a>
-        
-        <table class="bus-table">  <!-- Use the bus-table class for styling -->
+
+        <table class="bus-table"> <!-- Use the bus-table class for styling -->
             <thead>
                 <tr>
                     <th>Photo</th>

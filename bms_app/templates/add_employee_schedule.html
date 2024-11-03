@@ -2,17 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Schedule for {{ employee.first_name }} {{ employee.last_name }}</title>
+    <title>Add Schedule</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/add_employee.css' %}"> <!-- Link to your CSS file -->
 </head>
 <body>
-    <h1>Add Schedule for {{ employee.first_name }} {{ employee.last_name }}</h1>
+    <div class="container">
+        <h2>Add Schedule</h2>
 
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}  <!-- Render the form fields -->
-        <button type="submit">Add Schedule</button>
-    </form>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <label for="first_name">First Name:</label>
+            <input type="text" name="first_name" required>
+            
+            <label for="last_name">Last Name:</label>
+            <input type="text" name="last_name" required>
 
-    <a href="{% url 'employee_schedule' %}">Back to Schedule</a>
+            {{ form.as_p }}  <!-- Render the rest of the form fields -->
+            <button type="submit">Add Schedule</button>
+        </form>
+
+        <a href="{% url 'employee_schedule' %}">Back to Schedule</a>
+    </div>
 </body>
 </html>

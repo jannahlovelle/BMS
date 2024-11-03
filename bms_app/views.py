@@ -206,7 +206,8 @@ def delete_schedule(request, sched_id):
 # Employee Sched List
 @login_required
 def employee_schedule_list(request):
-    schedules = Schedule.objects.filter(bus__user=request.user)  # Adjust this if you want more filters
+    # Fetch schedules related to the user's buses and select related employee data
+    schedules = Schedule.objects.filter(bus__user=request.user).select_related('employee')
     return render(request, 'employee_schedule_list.html', {
         'schedules': schedules,
     })
@@ -215,12 +216,26 @@ def employee_schedule_list(request):
 @login_required
 def add_employee_schedule(request):
     if request.method == "POST":
+        # Get the employee's first and last name from the POST request
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+
+        # Create or get the employee object
+        employee, created = Employee.objects.get_or_create(
+            first_name=first_name,
+            last_name=last_name,
+            defaults={'user': request.user}  # Associate the employee with the logged-in user
+        )
+
+        # Now process the schedule form
         form = ScheduleForm(request.POST)
         if form.is_valid():
-            form.save()  # Save the schedule without linking to an employee
+            schedule = form.save(commit=False)  # Don't save yet
+            schedule.employee = employee  # Link the employee to the schedule
+            schedule.save()  # Save the schedule
             return redirect('employee_schedule_list')  # Redirect to the schedule list
     else:
-        form = ScheduleForm()  # Initialize empty form
+        form = ScheduleForm()  # Initialize an empty form
 
     return render(request, 'add_employee_schedule.html', {
         'form': form,

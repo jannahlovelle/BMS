@@ -2,37 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Schedules</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}"> <!-- Link to your CSS file -->
 </head>
 <body>
-    <h1>Employee Schedules</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Bus</th>
-                <th>Schedule</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for schedule in schedules %}
-                <tr>
-                    <td>{{ schedule.bus.plate_number }}</td>
-                    <td>{{ schedule.departure_time|date:"H:i" }}</td>
-                    <td>
-                        <a href="{% url 'edit_schedule' schedule.sched_id %}">Edit</a> | 
-                        <a href="{% url 'delete_schedule' schedule.sched_id %}">Delete</a>
-                    </td>
-                </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="3">No schedules found.</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <!-- Navbar Section -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="Logo">
+        </div>
+        <div class="nav-links">
+            <a href="{% url 'bus_list' %}">Buses</a>
+            <a href="{% url 'employee_list' %}">Employees</a>
+        </div>
+        <div class="profile">
+            <a href="{% url 'profile' %}">
+                <img src="{% static 'images/profile-icon.png' %}" alt="Profile">
+            </a>
+            <a href="{% url 'logout' %}">Log Out</a>
+        </div>
+    </div>
 
-    <a href="{% url 'add_employee_schedule' %}">Add New Schedule</a> <!-- Adjusted link -->
-    <a href="{% url 'employee_list' %}">Back to Home Page</a> <!-- Adjusted link -->
+    <!-- Tab Section -->
+    <div class="tabs">
+        <a href="{% url 'employee_list' %}"><button class="tab-btn">Employees</button></a>
+        <a href="{% url 'employee_schedule' %}"><button class="tab-btn active">Employee Schedules</button></a>
+    </div>
+
+    <!-- Search and Add Section -->
+    <div class="search-section">
+        <a href="{% url 'add_employee_schedule' %}">
+            <button class="add-btn">Add New Schedule +</button>
+        </a>
+    </div>
+
+    <!-- Schedules Table -->
+    <div id="container">
+        <div id="schedules-table">
+            <table class="bus-table">
+                <thead>
+                    <tr>
+                        <th>Bus</th>
+                        <th>Employee</th>
+                        <th>Departure Time</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for schedule in schedules %}
+                        <tr>
+                            <td>{{ schedule.bus.plate_number }}</td>
+                            <td>{{ schedule.employee.first_name }} {{ schedule.employee.last_name }}</td>
+                            <td>{{ schedule.departure_time|date:"H:i" }}</td>
+                            <td>
+                                <a href="{% url 'edit_schedule' schedule.sched_id %}">Edit</a> | 
+                                <a href="{% url 'delete_schedule' schedule.sched_id %}">Delete</a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No schedules found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>
