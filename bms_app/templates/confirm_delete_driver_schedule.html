@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Driver Schedule</title>
+</head>
+<body>
+    <h2>Are you sure you want to delete this schedule?</h2>
+    <p>{{ schedule.driver }} - {{ schedule.bus }}: {{ schedule.start_time }} to {{ schedule.end_time }} on {{ schedule.days_active }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+    <a href="{% url 'driver_schedule_list' %}">Cancel</a>
+</body>
+</html>

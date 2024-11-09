@@ -110,4 +110,14 @@ class Repair(models.Model):
     parts_used = models.CharField(max_length=255)
     follow_action = models.CharField(max_length=255)
     bus = models.ForeignKey('Bus', on_delete=models.CASCADE)
-    employee = models.ForeignKey('Employee', on_delete=models.CASCADE)  #
+    employee = models.ForeignKey('Employee', on_delete=models.CASCADE)  
+
+class DriverSchedule(models.Model):
+    driver = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    bus = models.ForeignKey(Bus, on_delete=models.CASCADE)
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    days_active = models.CharField(max_length=50, help_text="E.g., 'Mon-Fri' or 'Mon,Wed,Fri'")
+
+    def __str__(self):
+        return f"{self.driver} - {self.bus} ({self.start_time} to {self.end_time} on {self.days_active})"

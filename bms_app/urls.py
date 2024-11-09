@@ -33,10 +33,11 @@ urlpatterns = [
     path('employees/', views.employee_list, name='employee_list'),  # Optional: Separate employee list view
     path('schedules/', views.schedule_list, name='schedule_list'),  # Optional: Separate schedule list view
     path('repairs/', views.repair_list, name='repair_list'),  # Optional: Separate repair list view
-    # Add other URL patterns as needed
-    # New Url's
-    path('employee_schedule/', views.employee_schedule_list, name='employee_schedule'),
-    path('add_employee_schedule/', views.add_employee_schedule, name='add_employee_schedule'),
+    
+    path('driver_schedule/add/', views.add_driver_schedule, name='add_driver_schedule'),
+    path('driver_schedule/', views.driver_schedule_list, name='driver_schedule_list'),
+    path('driver_schedule/edit/<int:pk>/', views.edit_driver_schedule, name='edit_driver_schedule'),
+    path('driver_schedule/delete/<int:pk>/', views.delete_driver_schedule, name='delete_driver_schedule'),
 ]
 
 if settings.DEBUG:

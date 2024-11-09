@@ -4,8 +4,8 @@ from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-from bms_app.models import Bus, Employee, Schedule, UserProfile, Repair
-from .forms import BusForm, EmployeeForm, LoginForm, RepairForm, ScheduleForm, UserPasswordChangeForm, UserProfileForm
+from bms_app.models import Bus, DriverSchedule, Employee, Schedule, UserProfile, Repair
+from .forms import BusForm, DriverScheduleForm, EmployeeForm, LoginForm, RepairForm, ScheduleForm, UserPasswordChangeForm, UserProfileForm
 
 # Views
 
@@ -191,56 +191,6 @@ def delete_schedule(request, sched_id):
         return redirect('schedule_list')  # Redirect after deletion
     return render(request, 'confirm_delete_schedule.html', {'object': schedule})
 
-# Employee Sched
-#@login_required
-#def employee_schedule(request, employee_id):
-    employee = get_object_or_404(Employee, employee_id=employee_id, user=request.user)
-    schedules = Schedule.objects.filter(employee=employee)  # Assuming a foreign key in Schedule to Employee
-
-    context = {
-        'employee': employee,
-        'schedules': schedules,
-    }
-    return render(request, 'employee_schedule.html', context)
-
-# Employee Sched List
-@login_required
-def employee_schedule_list(request):
-    # Fetch schedules related to the user's buses and select related employee data
-    schedules = Schedule.objects.filter(bus__user=request.user).select_related('employee')
-    return render(request, 'employee_schedule_list.html', {
-        'schedules': schedules,
-    })
-
-# Add a employee sched
-@login_required
-def add_employee_schedule(request):
-    if request.method == "POST":
-        # Get the employee's first and last name from the POST request
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-
-        # Create or get the employee object
-        employee, created = Employee.objects.get_or_create(
-            first_name=first_name,
-            last_name=last_name,
-            defaults={'user': request.user}  # Associate the employee with the logged-in user
-        )
-
-        # Now process the schedule form
-        form = ScheduleForm(request.POST)
-        if form.is_valid():
-            schedule = form.save(commit=False)  # Don't save yet
-            schedule.employee = employee  # Link the employee to the schedule
-            schedule.save()  # Save the schedule
-            return redirect('employee_schedule_list')  # Redirect to the schedule list
-    else:
-        form = ScheduleForm()  # Initialize an empty form
-
-    return render(request, 'add_employee_schedule.html', {
-        'form': form,
-    })
-
 # Create a repair
 def add_repair(request):
     if request.method == 'POST':
@@ -287,3 +237,42 @@ def schedule_list(request):
 def repair_list(request):
     repairs = Repair.objects.filter(bus__user=request.user)
     return render(request, 'home_page_repair.html', {'repairs': repairs})
+
+@login_required
+def add_driver_schedule(request):
+    if request.method == 'POST':
+        form = DriverScheduleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('driver_schedule_list')
+    else:
+        form = DriverScheduleForm()
+    return render(request, 'add_driver_schedule.html', {'form': form})
+
+# List all DriverSchedules
+@login_required
+def driver_schedule_list(request):
+    schedules = DriverSchedule.objects.all()
+    return render(request, 'driver_schedule_list.html', {'schedules': schedules})
+
+# Edit an existing DriverSchedule
+@login_required
+def edit_driver_schedule(request, pk):  # Use 'id' as the parameter
+    schedule = get_object_or_404(DriverSchedule, pk=pk)
+    if request.method == 'POST':
+        form = DriverScheduleForm(request.POST, instance=schedule)
+        if form.is_valid():
+            form.save()
+            return redirect('driver_schedule_list')
+    else:
+        form = DriverScheduleForm(instance=schedule)
+    return render(request, 'edit_driver_schedule.html', {'form': form})
+
+# Delete a DriverSchedule
+@login_required
+def delete_driver_schedule(request, pk):  # Use 'id' as the parameter
+    schedule = get_object_or_404(DriverSchedule, pk=pk)
+    if request.method == 'POST':
+        schedule.delete()
+        return redirect('driver_schedule_list')
+    return render(request, 'confirm_delete_driver_schedule.html', {'schedule': schedule})

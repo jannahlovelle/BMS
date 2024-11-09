@@ -27,8 +27,8 @@
 
     <div class="tabs">
         <a href="{% url 'employee_list' %}"><button class="tab-btn active">Employees</button></a>
-        <a href="{% url 'employee_schedule' %}">
-            <button class="tab-btn">Employee Schedules</button>
+        <a href="{% url 'driver_schedule_list' %}">
+            <button class="tab-btn">View Driver Schedules</button>
         </a>
     </div>
 
@@ -36,6 +36,9 @@
     <br>
 
     <div class="employee-section">
+        <!-- Button to navigate to Driver Schedule -->
+        
+
         <a href="{% url 'add_employee' %}">
             <button class="add-btn">Add New Employee +</button>
         </a>

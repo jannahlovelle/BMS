@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from bms_app.models import Bus, Employee, Schedule, UserProfile
+from bms_app.models import Bus, DriverSchedule, Employee, Repair, Schedule, UserProfile
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 
 class UserProfileForm(forms.ModelForm):
@@ -36,10 +36,6 @@ class BusForm(forms.ModelForm):
         fields = ['plate_number', 'model', 'make', 'year', 'capacity', 'status']
 
 
-
-from django import forms
-from .models import Repair, Schedule, Bus
-
 class ScheduleForm(forms.ModelForm):
     bus = forms.ModelChoiceField(
         queryset=Bus.objects.all(),
@@ -66,15 +62,7 @@ class RepairForm(forms.ModelForm):
             'employee',  # Use 'employee' here, not 'employee_id'
         ]
 
-# It adds employee schedule
-class AddEmployeeScheduleForm(forms.ModelForm):
+class DriverScheduleForm(forms.ModelForm):
     class Meta:
-        model = Schedule
-        fields = ['bus', 'route', 'departure_time', 'arrival_time', 'status']
-
-    def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user', None)  # Get the user from kwargs
-        super().__init__(*args, **kwargs)
-
-        # Limit choices for bus and employee to those related to the user
-        self.fields['bus'].queryset = Bus.objects.filter(user=user)
+        model = DriverSchedule
+        fields = ['driver', 'bus', 'start_time', 'end_time', 'days_active']

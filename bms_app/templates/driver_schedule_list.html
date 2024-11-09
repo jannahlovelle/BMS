@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Schedule List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <!-- Navbar Section -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="Logo">
+        </div>
+        <div class="nav-links">
+            <a href="{% url 'bus_list' %}">Buses</a>
+            <a href="{% url 'employee_list' %}">Employees</a>
+        </div>
+        <div class="profile">
+            <a href="{% url 'profile' %}">
+                <img src="{% static 'images/profile-icon.png' %}" alt="Profile">
+            </a>
+            <a href="{% url 'logout' %}">Log Out</a>
+        </div>
+    </div>
+
+    <!-- Tab Section -->
+    <div class="tabs">
+        <a href="{% url 'employee_list' %}"><button class="tab-btn">Employees</button></a>
+        <a href="{% url 'driver_schedule_list' %}">
+            <button class="tab-btn active">View Driver Schedules</button>
+        </a>
+    </div>
+    <!-- Driver Schedule Section -->
+    <div class="schedule-section">
+        <a href="{% url 'add_driver_schedule' %}">
+            <button class="add-btn">Add New Schedule +</button>
+        </a>
+        <table class="bus-table">
+            <thead>
+                <tr>
+                    <th>Driver</th>
+                    <th>Bus</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Days Active</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for schedule in schedules %}
+                    <tr>
+                        <td>{{ schedule.driver }}</td>
+                        <td>{{ schedule.bus }}</td>
+                        <td>{{ schedule.start_time }}</td>
+                        <td>{{ schedule.end_time }}</td>
+                        <td>{{ schedule.days_active }}</td>
+                        <td>
+                            <a href="{% url 'edit_driver_schedule' schedule.pk %}">Edit</a> |
+                            <a href="{% url 'delete_driver_schedule' schedule.pk %}">Delete</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6">No driver schedules found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
