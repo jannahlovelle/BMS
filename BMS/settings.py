@@ -18,7 +18,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bms_app',
+    # 'bms_app',
+    'bms_user_authentication',
+    'bms_admin_dashboard',
+    'bms_bus_information_management',
+    'bms_driversworkers_management',
+    'bms_bus_schedule_management',
+    'bms_maintenancerepair_management',
 ]
 
 MIDDLEWARE = [
@@ -86,7 +92,7 @@ LOGOUT_REDIRECT_URL = 'landing_page'
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'bms_app/static'),
+    os.path.join(BASE_DIR, 'BMS/static'),
 ]
 
 # Default primary key field type
