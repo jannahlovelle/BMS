@@ -1,6 +1,9 @@
 from django.db import models
 from marshmallow import ValidationError
 
+from bms_bus_information_management.models import Bus
+from bms_driversworkers_management.models import Employee
+
 # Create your models here.
 class Schedule(models.Model):
     sched_id = models.AutoField(primary_key=True)
@@ -12,8 +15,8 @@ class Schedule(models.Model):
         ('in_transit', 'In Transit'),
         ('arrived', 'Arrived'),
     ])
-    bus = models.ForeignKey('bms_bus_information_management.Bus', on_delete=models.CASCADE)
-    employee = models.ForeignKey('bms_driversworkers_management.Employee', on_delete=models.CASCADE, related_name='schedules', null=True)  # Add this line
+    bus = models.ForeignKey(Bus, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='schedules', null=True)  # Add this line
 
     # New fields
     frequency = models.CharField(max_length=50, null=True, blank=True)  # e.g., daily, weekly

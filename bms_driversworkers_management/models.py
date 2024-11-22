@@ -3,6 +3,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import User
 
+from bms_bus_information_management.models import Bus
+
 # Create your models here.
 class Employee(models.Model):
     JOB_TITLE_CHOICES = [
@@ -33,8 +35,8 @@ class Employee(models.Model):
         return f"{self.first_name} {self.last_name}"
     
 class DriverSchedule(models.Model):
-    driver = models.ForeignKey('bms_driversworkers_management.Employee', on_delete=models.CASCADE)
-    bus = models.ForeignKey('bms_bus_information_management.Bus', on_delete=models.CASCADE)
+    driver = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    bus = models.ForeignKey(Bus, on_delete=models.CASCADE)
     start_time = models.TimeField()
     end_time = models.TimeField()
     days_active = models.CharField(max_length=50, help_text="E.g., 'Mon-Fri' or 'Mon,Wed,Fri'")
