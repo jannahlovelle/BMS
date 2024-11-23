@@ -4,84 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add an Employee</title>
-    <style>
-        /* General styles for the page */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 10px; /* Reduced padding */
-            background-color: #f0f4f8; /* Light background */
-        }
-
-        /* Container for the form */
-        .container {
-            max-width: 500px; /* Reduced max-width for a tighter layout */
-            margin: 0 auto; /* Center the container */
-            padding: 15px; /* Reduced padding */
-            background-color: #ffffff; /* White background for the form */
-            border-radius: 8px; /* Rounded corners */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow */
-        }
-
-        /* Form heading */
-        h2 {
-            text-align: center; /* Centered heading */
-            color: #333; /* Dark text color */
-            margin-bottom: 10px; /* Reduced space below heading */
-        }
-
-        /* Styles for form elements */
-        form {
-            display: flex;
-            flex-direction: column; /* Stack elements vertically */
-        }
-
-        /* Input fields and select elements */
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="file"],
-        select,
-        textarea {
-            margin: 5px 0; /* Reduced space between inputs */
-            padding: 8px; /* Reduced padding */
-            border: 1px solid #ddd; /* Light gray border */
-            border-radius: 4px; /* Rounded corners */
-            font-size: 14px; /* Smaller font size */
-        }
-
-        /* Button styles */
-        button {
-            padding: 8px 12px; /* Reduced button padding */
-            background-color: #2874d1; /* Primary color */
-            color: white; /* White text color */
-            border: none; /* No border */
-            border-radius: 4px; /* Rounded corners */
-            cursor: pointer; /* Pointer cursor */
-            font-size: 14px; /* Smaller font size */
-            margin-top: 10px; /* Space above the button */
-        }
-
-        /* Button hover effect */
-        button:hover {
-            background-color: #1e5faa; /* Darker shade on hover */
-        }
-
-        /* Back link styling */
-        a {
-            display: block; /* Block display for spacing */
-            text-align: center; /* Center link */
-            margin-top: 10px; /* Space above link */
-            color: #2874d1; /* Primary color */
-            text-decoration: none; /* No underline */
-            font-size: 14px; /* Smaller font size */
-        }
-
-        /* Back link hover effect */
-        a:hover {
-            text-decoration: underline; /* Underline on hover */
-        }
-    </style>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/add_template.css' %}">
 </head>
 <body>
     <div class="container">
