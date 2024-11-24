@@ -21,7 +21,7 @@ class Employee(models.Model):
     first_name = models.CharField(max_length=100)
     middle_name = models.CharField(max_length=100, null=True, blank=True)  # Added middle name
     last_name = models.CharField(max_length=100, null=True, blank=True)
-    email = models.EmailField(max_length=100, null=True, blank=True)
+    email = models.EmailField(max_length=100, null=True, blank=True, unique=True)  # Added email field
     contact_no = models.CharField(max_length=30, null=True, blank=True)  # Added contact number
     status = models.CharField(max_length=100, choices=EMPLOYEE_STATUS_CHOICES, null=True, blank=True)  # Added status field
     job_title = models.CharField(max_length=100, choices=JOB_TITLE_CHOICES, null=True, blank=True)  # Added job title field

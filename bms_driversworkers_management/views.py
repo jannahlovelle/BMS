@@ -97,3 +97,4 @@ def delete_driver_schedule(request, pk):  # Use 'id' as the parameter
         schedule.delete()
         return redirect('driver_schedule_list')
     return render(request, 'confirm_delete_driver_schedule.html', {'schedule': schedule})
+

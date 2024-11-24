@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule History</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <h1>Schedule History for {{ schedule.route }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Updated At</th>
+                <th>Route</th>
+                <th>Departure Time</th>
+                <th>Arrival Time</th>
+                <th>Status</th>
+                <th>Bus</th>
+                <th>Employee</th>
+                <th>Frequency</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in page_obj %}
+                <tr>
+                    <td>{{ record.updated_at }}</td>
+                    <td>{{ record.route }}</td>
+                    <td>{{ record.departure_time }}</td>
+                    <td>{{ record.arrival_time }}</td>
+                    <td>{{ record.status }}</td>
+                    <td>{{ record.bus }}</td>
+                    <td>{{ record.employee }}</td>
+                    <td>{{ record.frequency }}</td>
+                    <td>{{ record.notes }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Pagination Controls -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</body>
+</html>

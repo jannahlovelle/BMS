@@ -8,7 +8,11 @@ def add_repair(request):
     if request.method == 'POST':
         form = RepairForm(request.POST)
         if form.is_valid():
-            form.save()
+            repair = form.save()
+            # Set the bus status to "Under Maintenance"
+            bus = repair.bus
+            bus.status = 'Under Maintenance'
+            bus.save()
             return redirect('repair_list')  # Replace with your redirect URL
     else:
         form = RepairForm()
@@ -20,7 +24,12 @@ def edit_repair(request, pk):
     if request.method == 'POST':
         form = RepairForm(request.POST, instance=repair)
         if form.is_valid():
-            form.save()
+            repair = form.save()
+            # Check if the repair status is "done" and update the bus status
+            if repair.status == 'done':
+                bus = repair.bus
+                bus.status = 'On Standby'
+                bus.save()
             return redirect('repair_list')  # Replace with your redirect URL
     else:
         form = RepairForm(instance=repair)

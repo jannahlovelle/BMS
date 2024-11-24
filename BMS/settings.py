@@ -18,9 +18,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'bms_app',
     'bms_user_authentication',
-    'bms_admin_dashboard',
+    'bms_dashboard',
     'bms_bus_information_management',
     'bms_driversworkers_management',
     'bms_bus_schedule_management',
@@ -82,7 +81,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Manila'
 USE_I18N = True
 USE_TZ = True
 
