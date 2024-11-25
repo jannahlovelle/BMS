@@ -1,5 +1,5 @@
 # 🚌 Bus Management System
-Bus Management System - CSIT327 G5
+## Bus Management System - CSIT327 G5
 
 members:
 Sendrijas, Jannah Lovelle B. 
