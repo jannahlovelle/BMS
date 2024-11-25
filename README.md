@@ -1,10 +1,13 @@
-# BMS-IM2
+🚌 Bus Management System
 Bus Management System - CSIT327 G5
 
 members:
 Sendrijas, Jannah Lovelle B. 
 Gare, Ragelo John C.
 Regis, John Lawrence C.
+
+👨‍💻 Contributer
+
 
 
 link to our gantt chart:
