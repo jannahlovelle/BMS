@@ -6,7 +6,7 @@ Sendrijas, Jannah Lovelle B.
 Gare, Ragelo John C.
 Regis, John Lawrence C.
 
-👨‍💻 Contributors
+## 👨‍💻 Contributors
 
 
 
