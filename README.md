@@ -1,6 +1,6 @@
 # 🚌 Bus Management System - CSIT327 G5
 
-# 🚌 **Project Description**
+## **Project Description**
 
 The **Bus Management System** is a web application built to help bus company managers (admins) easily take care of everything related to buses, schedules, repairs, and employees. It’s like a digital assistant for managing all aspects of running a bus service, making things simpler and faster.
 
