@@ -14,11 +14,23 @@ Regis, John Lawrence C.
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
-## 👥 Contributors
+## 👥 Our Contributors
 
-| ![Ragelo John C. Gare](https://avatars.githubusercontent.com/username1?s=150) | ![Contributor 2](https://avatars.githubusercontent.com/username2?s=150) | ![Contributor 3](https://avatars.githubusercontent.com/username3?s=150) |
-|:-----------------------------------------------------------------------------:|:-----------------------------------------------------------------------------:|:-----------------------------------------------------------------------------:|
-| [**Ragelo John C. Gare**](https://github.com/username1)                       | [**Contributor 2**](https://github.com/username2)                            | [**Contributor 3**](https://github.com/username3)                            |
+- We extend our heartfelt gratitude for your invaluable contribution to our project! Your efforts play a pivotal role in elevating this system to greater heights.
+- Make sure you show some love by giving ⭐ to our repository.
+
+<p align="center">
+  <a href="https://github.com/username1">
+    <img src="https://avatars.githubusercontent.com/username1?s=100" alt="Contributor 1" style="border-radius:50%;margin:10px;">
+  </a>
+  <a href="https://github.com/username2">
+    <img src="https://avatars.githubusercontent.com/username2?s=100" alt="Contributor 2" style="border-radius:50%;margin:10px;">
+  </a>
+  <a href="https://github.com/username3">
+    <img src="https://avatars.githubusercontent.com/username3?s=100" alt="Contributor 3" style="border-radius:50%;margin:10px;">
+  </a>
+</p>
+                           |
 
 
 
