@@ -82,10 +82,9 @@
     <div class="navbar">
         <span class="open-nav-btn" onclick="openNav()">&#9776; Menu</span>
         <div class="profile">
-            <a href="{% url 'profile' %}">
+            <a href="{% url 'profile' %}" style="margin-right: 4rem;">
                 <img src="{% static 'images/profile-icon.png' %}" alt="Profile">
             </a>
-            <a href="{% url 'logout' %}">Log Out</a>
         </div>
     </div>
 
@@ -138,6 +137,10 @@
                             <a href="{% url 'edit_schedule' schedule.sched_id %}" class="btn btn-warning">Edit</a>
                             <a href="{% url 'delete_schedule' schedule.sched_id %}" class="btn btn-danger">Delete</a>
                         </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="8">No schedules found.</td>
                     </tr>
                 {% endfor %}
             </tbody>

@@ -3,19 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Bus Schedule</title>
+    <title>Add Repair</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/add_template.css' %}">
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container to center the form */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Form container styling */
+        .form-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+        }
+
+        /* Title styling */
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* Form fields and layout */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            color: #555;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Input, select, and textarea styling */
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* Input focus effect */
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2874d1;
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.2);
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #2874d1;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #2874d1;
+        }
+
+        /* Back link */
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h2>Add Repair</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }} <!-- Render the form fields -->
-            <button type="submit">Save Active Repair</button>
-        </form>
-        <a href="{% url 'repair_list' %}">Back to Sir</a>
+        <div class="form-container">
+            <h2>Add Repair</h2>
+            <form method="post">
+                {% csrf_token %}
+
+                <!-- Repair Description -->
+                <div class="form-group">
+                    <label for="{{ form.repair_desc.id_for_label }}">Repair Description</label>
+                    {{ form.repair_desc }}
+                </div>
+
+                <!-- Start Date -->
+                <div class="form-group">
+                    <label for="{{ form.start_date.id_for_label }}">Start Date</label>
+                    {{ form.start_date }}
+                </div>
+
+                <!-- Estimated Completion Date -->
+                <div class="form-group">
+                    <label for="{{ form.est_completion.id_for_label }}">Estimated Completion</label>
+                    {{ form.est_completion }}
+                </div>
+
+                <!-- Repair Status -->
+                <div class="form-group">
+                    <label for="{{ form.status.id_for_label }}">Status</label>
+                    {{ form.status }}
+                </div>
+
+                <!-- Repair Cost -->
+                <div class="form-group">
+                    <label for="{{ form.repair_cost.id_for_label }}">Repair Cost</label>
+                    {{ form.repair_cost }}
+                </div>
+
+                <!-- Parts Used -->
+                <div class="form-group">
+                    <label for="{{ form.parts_used.id_for_label }}">Parts Used</label>
+                    {{ form.parts_used }}
+                </div>
+
+                <!-- Follow Action -->
+                <div class="form-group">
+                    <label for="{{ form.follow_action.id_for_label }}">Follow-Up Action</label>
+                    {{ form.follow_action }}
+                </div>
+
+                <!-- Bus Selection -->
+                <div class="form-group">
+                    <label for="{{ form.bus.id_for_label }}">Bus</label>
+                    {{ form.bus }}
+                </div>
+
+                <!-- Employee -->
+                <div class="form-group">
+                    <label for="{{ form.employee.id_for_label }}">Employee</label>
+                    {{ form.employee }}
+                </div>
+
+                <button type="submit" class="submit-btn">Save Active Repair</button>
+            </form>
+
+            <a href="{% url 'repair_list' %}" class="back-link">Back to Repairs List</a>
+        </div>
     </div>
 </body>
 </html>

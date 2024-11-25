@@ -52,6 +52,23 @@
             color: #111;
         }
 
+        .navbar .profile p {
+            position: relative;  /* Enable the top property to work */
+            bottom: 1.9rem;  /* Position it 20rem from its normal position */
+            right: 0rem;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            z-index: 1;
+        }
+
+        .navbar .profile img {
+            position: relative;  /* Enable the top property to work */
+            top: 2rem;
+            right: 4.5rem;
+            width: 60px;
+        }
+
         #main {
             transition: margin-left 0.5s;
             padding: 16px;
@@ -82,24 +99,18 @@
     <div class="navbar">
         <span class="open-nav-btn" onclick="openNav()">&#9776; Menu</span>
         <div class="profile">
-            <a href="{% url 'profile' %}">
+            <a href="{% url 'profile' %}" style="margin-right: 4rem;">
                 <img src="{% static 'images/profile-icon.png' %}" alt="Profile">
             </a>
-            <a href="{% url 'logout' %}">Log Out</a>
+            <p class="hello-admin">Hello Admin!</p>
         </div>
     </div>
 
     <!-- Main Content -->
     <div id="main" class="container">
-        <!-- Tab Section -->
-        <div class="tabs">
-            <a href="{% url 'bus_list' %}"><button class="tab-btn active">Buses</button></a>
-            <a href="{% url 'schedule_list' %}"><button class="tab-btn">Bus Schedules</button></a>
-            <a href="{% url 'repair_list' %}"><button class="tab-btn">Active Repairs</button></a>
-        </div>
-
         <!-- Search and Add Section -->
         <div class="schedule-section">
+            <h1>Bus List</h1>
             <a href="{% url 'add_bus' %}">
                 <button class="add-btn">Add New Bus +</button>
             </a>
