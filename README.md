@@ -21,7 +21,7 @@ Regis, John Lawrence C.
 
 <p align="center">
   <a href="https://github.com/username1">
-    <img src="https://avatars.githubusercontent.com/username1?s=100" alt="Contributor 1" style="border-radius:50%;margin:10px;">
+    <img src="[https://avatars.githubusercontent.com/username1?s=100](https://github.com/Rafeloif)" alt="Contributor 1" style="border-radius:50%;margin:10px;">
   </a>
   <a href="https://github.com/username2">
     <img src="https://avatars.githubusercontent.com/username2?s=100" alt="Contributor 2" style="border-radius:50%;margin:10px;">
