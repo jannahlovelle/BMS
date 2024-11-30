@@ -3,7 +3,6 @@ from django.urls import path
 from bms_bus_schedule_management import views
 
 urlpatterns=[
-    path('schedule_dashboard/', views.schedule_homepage, name='schedule_homepage'),
     path('add_schedule/', views.add_schedule, name='add_schedule'),
     path('edit_schedule/<int:sched_id>/', views.edit_schedule, name='edit_schedule'),
     path('delete_schedule/<int:sched_id>/', views.delete_schedule, name='delete_schedule'),

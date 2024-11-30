@@ -16,7 +16,7 @@ def add_employee(request):
             employee = form.save(commit=False)
             employee.user = request.user  # Associate with logged-in user
             employee.save()
-            logger.info(f"Bus added successfully: {employee}")
+            logger.info(f"Employee added successfully: {employee}")
             return redirect('employee_list')
         else:
             logger.error(f"Form is invalid: {form.errors}")  # Log form errors
