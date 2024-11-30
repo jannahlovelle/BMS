@@ -5,17 +5,144 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Bus</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/add_template.css' %}">
+    <style>
+        /* General Body and Layout Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container for center-aligning the form */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Styling for the form container */
+        .form-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        /* Heading Style */
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* Form Group Styling */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            color: #555;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Styling the form fields */
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* Focused input fields */
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #2874d1;
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.2);
+        }
+
+        /* Submit Button Styling */
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #2874d1;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #2874d1;
+        }
+
+        /* Back Link Styling */
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h2>Add Bus</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }} <!-- Render the form fields -->
-            <button type="submit">Add Bus</button>
-        </form>
-        <a href="{% url 'home_page' %}">Back to Bus List</a>
+        <div class="form-container">
+            <h2>Add Bus</h2>
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="{{ form.plate_number.id_for_label }}">Plate Number</label>
+                    {{ form.plate_number }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.model.id_for_label }}">Model</label>
+                    {{ form.model }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.make.id_for_label }}">Make</label>
+                    {{ form.make }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.year.id_for_label }}">Year</label>
+                    {{ form.year }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.capacity.id_for_label }}">Capacity</label>
+                    {{ form.capacity }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.status.id_for_label }}">Status</label>
+                    {{ form.status }}
+                </div>
+
+                <button type="submit" class="submit-btn">Add Bus</button>
+            </form>
+
+            <a href="{% url 'home_page' %}" class="back-link">Back to Bus List</a>
+        </div>
     </div>
 </body>
 </html>

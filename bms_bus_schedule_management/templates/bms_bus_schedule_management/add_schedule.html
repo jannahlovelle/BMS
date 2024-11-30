@@ -5,17 +5,152 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Bus Schedule</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/add_template.css' %}">
+    <style>
+        /* General Body and Layout Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container for center-aligning the form */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ensure it takes at least the full viewport height */
+            padding: 20px; /* Add some space around the form */
+        }
+
+        /* Form Container Styling */
+        .form-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box; /* Ensure padding does not exceed width */
+        }
+
+        /* Heading Style */
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* Form Group Styling */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            color: #555;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Styling the form fields */
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* Focused input fields */
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #2874d1;
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.2);
+        }
+
+        /* Submit Button Styling */
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #2874d1;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #2874d1;
+        }
+
+        /* Back Link Styling */
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h2>Add Bus Schedule</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }} <!-- Render the form fields -->
-            <button type="submit">Save Schedule</button>
-        </form>
-        <a href="{% url 'home_page' %}">Back to Home</a>
+        <div class="form-container">
+            <h2>Add Bus Schedule</h2>
+            <form method="post">
+                {% csrf_token %}
+                
+                <!-- Bus Selection -->
+                <div class="form-group">
+                    <label for="{{ form.bus.id_for_label }}">Bus</label>
+                    {{ form.bus }}
+                </div>
+
+                <!-- Route -->
+                <div class="form-group">
+                    <label for="{{ form.route.id_for_label }}">Route</label>
+                    {{ form.route }}
+                </div>
+
+                <!-- Status -->
+                <div class="form-group">
+                    <label for="{{ form.status.id_for_label }}">Status</label>
+                    {{ form.status }}
+                </div>
+
+                <!-- Employee -->
+                <div class="form-group">
+                    <label for="{{ form.employee.id_for_label }}">Employee</label>
+                    {{ form.employee }}
+                </div>
+
+                <!-- Frequency -->
+                <div class="form-group">
+                    <label for="{{ form.frequency.id_for_label }}">Frequency</label>
+                    {{ form.frequency }}
+                </div>
+
+                <!-- Notes -->
+                <div class="form-group">
+                    <label for="{{ form.notes.id_for_label }}">Notes</label>
+                    {{ form.notes }}
+                </div>
+
+                <button type="submit" class="submit-btn">Save Schedule</button>
+            </form>
+
+            <a href="{% url 'schedule_list' %}" class="back-link">Back to Schedule List</a>
+        </div>
     </div>
 </body>
 </html>

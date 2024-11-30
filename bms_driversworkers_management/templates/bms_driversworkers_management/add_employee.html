@@ -5,17 +5,179 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add an Employee</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/add_template.css' %}">
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container to center the form */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Form container styling */
+        .form-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+        }
+
+        /* Title styling */
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* Form fields and layout */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            color: #555;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Input, select, and textarea styling */
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* Input focus effect */
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2874d1;
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.2);
+        }
+
+        /* File input style (for photo upload) */
+        .form-group input[type="file"] {
+            padding: 5px;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #2874d1;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #2874d1;
+        }
+
+        /* Back link */
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h2>Add Employee</h2>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }} <!-- Render the form fields -->
-            <button type="submit">Add Employee</button>
-        </form>
-        <a href="{% url 'home_page' %}">Back</a>
+        <div class="form-container">
+            <h2>Add Employee</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <!-- Employee First Name -->
+                <div class="form-group">
+                    <label for="{{ form.first_name.id_for_label }}">First Name</label>
+                    {{ form.first_name }}
+                </div>
+
+                <!-- Employee Middle Name -->
+                <div class="form-group">
+                    <label for="{{ form.middle_name.id_for_label }}">Middle Name</label>
+                    {{ form.middle_name }}
+                </div>
+
+                <!-- Employee Last Name -->
+                <div class="form-group">
+                    <label for="{{ form.last_name.id_for_label }}">Last Name</label>
+                    {{ form.last_name }}
+                </div>
+
+                <!-- Employee Email -->
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}">Email</label>
+                    {{ form.email }}
+                </div>
+
+                <!-- Employee Contact Number -->
+                <div class="form-group">
+                    <label for="{{ form.contact_no.id_for_label }}">Contact No.</label>
+                    {{ form.contact_no }}
+                </div>
+
+                <!-- Employee Status -->
+                <div class="form-group">
+                    <label for="{{ form.status.id_for_label }}">Status</label>
+                    {{ form.status }}
+                </div>
+
+                <!-- Employee Job Title -->
+                <div class="form-group">
+                    <label for="{{ form.job_title.id_for_label }}">Job Title</label>
+                    {{ form.job_title }}
+                </div>
+
+                <!-- Employee Date of Hire -->
+                <div class="form-group">
+                    <label for="{{ form.date_of_hire.id_for_label }}">Date of Hire</label>
+                    {{ form.date_of_hire }}
+                </div>
+
+                <!-- Employee Photo -->
+                <div class="form-group">
+                    <label for="{{ form.photo.id_for_label }}">Photo</label>
+                    {{ form.photo }}
+                </div>
+
+                <button type="submit" class="submit-btn">Add Employee</button>
+            </form>
+
+            <a href="{% url 'employee_list' %}" class="back-link">Back to Employee List</a>
+        </div>
     </div>
 </body>
 </html>
