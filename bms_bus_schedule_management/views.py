@@ -80,4 +80,16 @@ def stop_schedule(request, sched_id):
         schedule.save()
     return redirect('schedule_list')
 
+@login_required
+def schedule_homepage(request):
+    # employees = Employee.objects.filter(user=request.user)
+    schedule = Schedule.objects.filter(user=request.user)
+    # schedules = Schedule.objects.filter(bus__user=request.user)  # Filter schedules by the user of the related bus
+    # repairs = Repair.objects.filter(bus__user=request.user)  # Filter repairs by the user of the related bus
+    return render(request,  'bms_bus_information_management/home_page_schedule.html', {
+        # 'employees': employees,
+        'buses': schedule,
+        # 'schedules': schedules,
+        # 'repairs': repairs
+    })
 

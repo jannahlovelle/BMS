@@ -2,9 +2,10 @@ import os
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
-
+import logging
 from bms_driversworkers_management.forms import DriverScheduleForm, EmployeeForm
 from bms_driversworkers_management.models import DriverSchedule, Employee
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 @login_required
@@ -15,7 +16,10 @@ def add_employee(request):
             employee = form.save(commit=False)
             employee.user = request.user  # Associate with logged-in user
             employee.save()
+            logger.info(f"Bus added successfully: {employee}")
             return redirect('employee_list')
+        else:
+            logger.error(f"Form is invalid: {form.errors}")  # Log form errors
     else:
         form = EmployeeForm()
     return render(request, 'bms_driversworkers_management/add_employee.html', {'form': form})
