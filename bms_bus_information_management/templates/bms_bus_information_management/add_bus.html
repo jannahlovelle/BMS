@@ -125,7 +125,7 @@
 
                 <div class="form-group">
                     <label for="{{ form.year.id_for_label }}">Year</label>
-                    {{ form.year }}
+                    <input type="date" id="{{ form.year.id_for_label }}" name="year" value="{{ form.year.value|default:'' }}" required>
                 </div>
 
                 <div class="form-group">

@@ -2,8 +2,13 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from bms_bus_information_management.forms import BusForm
 from bms_bus_information_management.models import Bus
+from django.shortcuts import render
+import logging
+from django.contrib.auth.decorators import login_required
+from bms_bus_information_management.models import Bus
 from django.http import JsonResponse
 
+logger = logging.getLogger(__name__)
 # Create your views here.
 
 @login_required
@@ -12,11 +17,15 @@ def add_bus(request):
         form = BusForm(request.POST)
         if form.is_valid():
             bus = form.save(commit=False)
-            bus.user = request.user
+            bus.user = request.user  # Set the user who is adding the bus
             bus.save()
+            logger.info(f"Bus added successfully: {bus}")
             return redirect('home_page')
+        else:
+            logger.error(f"Form is invalid: {form.errors}")  # Log form errors
     else:
         form = BusForm()
+
     return render(request, 'bms_bus_information_management/add_bus.html', {'form': form})
 
 
