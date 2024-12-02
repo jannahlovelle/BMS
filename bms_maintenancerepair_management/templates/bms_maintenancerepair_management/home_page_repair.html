@@ -61,6 +61,77 @@
             .sidenav { padding-top: 15px; }
             .sidenav a { font-size: 18px; }
         }
+        /* Modal Styling */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5); /* Dim background */
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+
+        .modal-content label {
+            display: block;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .modal-content input,
+        .modal-content select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .modal-content button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .modal-content button:hover {
+            background-color: #0056b3;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+    
     </style>
 </head>
 <body>
@@ -90,9 +161,71 @@
 
     <div class="repair-section" id="main">
         <h1>Repair List</h1>
-        <a href="{% url 'add_repair' %}">
+
+    
+        <!-- Search and Add Section -->
+        <div class="schedule-section">
             <button class="add-btn">Add New Repair +</button>
-        </a>
+        </div>
+        <!-- Modal Structure -->
+        <div id="addRepairModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeModal">&times;</span>
+                <h2>Add Repair</h2>
+                <!-- Form that will be submitted via POST to the add_bus view -->
+                <form method="POST" action="{% url 'add_repair' %}">
+                    {% csrf_token %}
+                    
+                    <!-- Repair Description -->
+                    <label for="repair_desc">Repair Description:</label>
+                    <input type="text" id="repair_desc" name="repair_desc" value="{{ form.repair_desc.value }}" required>
+                    
+                    <label for="start_date">Start Date:</label>
+                    <input type="date" id="start_date" name="start_date" value="{{ form.start_date.value }}" required>
+
+                    <label for="est_completion">Estimated Completion:</label>
+                    <input type="date" id="est_completion" name="est_completion" value="{{ form.est_completion.value }}" required>
+
+                    <label for="status">Status:</label>
+                    <select id="status" name="status" required>
+                        <option value="under_maintenance">Under Maintenance</option>
+                        <option value="done">Done</option>
+                    </select>
+
+                    <label for="repair_cost">Repair Cost:</label>
+                    <input type="number" id="repair_cost" name="repair_cost" value="{{ form.repair_cost.value }}" required>
+
+                    <label for="parts_used">Parts Used:</label>
+                    <input type="text" id="parts_used" name="parts_used" value="{{ form.parts_used.value }}" required>
+
+                    <label for="follow_action">Follow-up Action:</label>
+                    <input type="text" id="follow_action" name="follow_action" value="{{ form.follow_action.value }}" required>
+
+                    <!-- Bus Dropdown -->
+                    <label for="bus">Bus (Plate Number):</label>
+                    <select id="bus" name="bus" required>
+                        {% for bus in buses %}
+                            <option value="{{ bus.id }}">{{ bus.plate_number }} - {{ bus.model }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <!-- Employee -->
+                    <label for="employee">Assigned Employee:</label>
+                    <select id="employee" name="employee" required>
+                        {% for employee in employees %}
+                            <option value="{{ employee.id }}">{{ employee.first_name }} {{ employee.last_name }}</option>
+                        {% endfor %}
+                    </select>
+
+
+                    
+
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+
+        
         <table class="bus-table">
             <thead>
                 <tr>
@@ -131,3 +264,31 @@
     </div>
 </body>
 </html>
+<!-- JavaScript for Sidenav -->
+<script src="{% static 'js/scripts.js' %}"></script>
+<script>
+    // JavaScript for Modal
+
+    // Get modal elements
+    const modal = document.getElementById("addRepairModal");
+    const addButton = document.querySelector(".add-btn"); // Add New Bus button
+    const closeButton = document.querySelector(".close"); // Close button in modal
+
+    // Open the modal when clicking "Add New Bus"
+    addButton.addEventListener("click", (e) => {
+        e.preventDefault(); // Prevent default link behavior
+        modal.style.display = "block"; // Show the modal
+    });
+
+    // Close the modal when clicking the "X" button
+    closeButton.addEventListener("click", () => {
+        modal.style.display = "none"; // Hide the modal
+    });
+
+    // Close the modal when clicking outside the modal content
+    window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.style.display = "none"; // Hide the modal
+        }
+    });
+</script>
