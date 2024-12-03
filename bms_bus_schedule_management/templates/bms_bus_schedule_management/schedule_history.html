@@ -6,57 +6,114 @@
     <title>Schedule History</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidenav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
 </head>
 <body>
-    <h1>Schedule History for {{ schedule.route }}</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Updated At</th>
-                <th>Route</th>
-                <th>Departure Time</th>
-                <th>Arrival Time</th>
-                <th>Status</th>
-                <th>Bus</th>
-                <th>Employee</th>
-                <th>Frequency</th>
-                <th>Notes</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for record in page_obj %}
-                <tr>
-                    <td>{{ record.updated_at }}</td>
-                    <td>{{ record.route }}</td>
-                    <td>{{ record.departure_time }}</td>
-                    <td>{{ record.arrival_time }}</td>
-                    <td>{{ record.status }}</td>
-                    <td>{{ record.bus }}</td>
-                    <td>{{ record.employee }}</td>
-                    <td>{{ record.frequency }}</td>
-                    <td>{{ record.notes }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <!-- Pagination Controls -->
-    <div class="pagination">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-                <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-            {% endif %}
-
-            <span class="current">
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-            </span>
-
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">next</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-            {% endif %}
-        </span>
+    <!-- Side Navigation -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <img src="{% static 'images/logo.png' %}" alt="Logo" style="width: 100px; height: 100px; border-radius: 50%;">
+        </div>
+        <a href="{% url 'dashboard' %}"><i class="fa fa-fw fa-tachometer"></i> Dashboard</a>
+        <a href="{% url 'bus_list' %}"><i class="fa fa-fw fa-bus"></i> Buses</a>
+        <a href="{% url 'schedule_list' %}"><i class="fa fa-fw fa-calendar"></i> Schedules</a>
+        <a href="{% url 'repair_list' %}"><i class="fa fa-fw fa-wrench"></i> Repairs</a>
+        <a href="{% url 'employee_list' %}"><i class="fa fa-fw fa-users"></i> Employees</a>
+        <a href="{% url 'profile' %}"><i class="fa fa-fw fa-user"></i> Profile</a>
+        <a href="{% url 'logout' %}"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
     </div>
+
+    <!-- Navbar Section -->
+    <div class="navbar">
+        <span class="open-nav-btn" onclick="openNav()">&#9776;</span>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main" class="schedule-section">
+        <h1>Schedule History for {{ schedule.route }}</h1>
+        
+        <table class="bus-table">
+            <thead>
+                <tr>
+                    <th>Bus</th>
+                    <th>Driver</th>
+                    <th>Route</th>
+                    <th>Updated At</th>
+                    <th>Departure Time</th>
+                    <th>Arrival Time</th>
+                    <th>Status</th>
+                    <th>Frequency</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in page_obj %}
+                    <tr>
+                        <td>{{ record.bus }}</td>
+                        <td>{{ record.employee }}</td>
+                        <td>{{ record.route }}</td>
+                        <td>{{ record.updated_at }}</td>
+                        <td>{{ record.departure_time }}</td>
+                        <td>{{ record.arrival_time }}</td>
+                        <td>{{ record.status }}</td>
+                        <td>{{ record.frequency }}</td>
+                        <td>{{ record.notes }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="9">No records found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Pagination Controls -->
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+
+    <!-- JavaScript for Modal -->
+    <script>
+        const modal = document.getElementById('addScheduleModal');
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        // Open modal
+        openModalBtn.addEventListener('click', () => {
+            modal.style.display = 'block';
+        });
+
+        // Close modal
+        closeModalBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside of it
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
