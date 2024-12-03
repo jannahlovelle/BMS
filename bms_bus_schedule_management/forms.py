@@ -5,12 +5,8 @@ from bms_bus_schedule_management.models import Schedule
 
 
 class ScheduleForm(forms.ModelForm):
-    bus = forms.ModelChoiceField(
-        queryset=Bus.objects.all(),
-        to_field_name='plate_number',  # Assuming plate_number is the field you want to display
-        label='Select Bus'
-    )
 
     class Meta:
         model = Schedule
-        fields = ['route', 'status', 'bus', 'employee' ,'frequency', 'notes']
+        fields = ['bus', 'employee' ,'route', 'notes']
+        

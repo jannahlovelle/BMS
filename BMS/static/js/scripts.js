@@ -7,8 +7,8 @@ function openNav() {
 
 // Function to close the side menu
 function closeNav() {
-    document.getElementById("mySidenav").style.width = "50px";
-    document.getElementById("main").style.marginLeft = "50px";
+    document.getElementById("mySidenav").style.width = "0px";
+    document.getElementById("main").style.marginLeft = "0px";
     localStorage.setItem("menuState", "closed");
 }
 

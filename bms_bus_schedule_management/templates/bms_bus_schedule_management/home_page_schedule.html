@@ -41,15 +41,15 @@
         <!-- Modal for Adding a Schedule -->
     <div id="addScheduleModal" class="modal">
         <div class="modal-content">
-            <span class="close" id="closeModalBtn">&times;</span>
+            <span class="close-modal" id="closeModalBtn">&times;</span>
             <h2>Add New Schedule</h2>
-            <form action="{% url 'add_schedule' %}" method="POST">
+            <form action="{% url 'add_schedule' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="bus">Bus</label>
                     <select name="bus" id="bus">
                         {% for bus in buses %}
-                        <option value="{{ bus.id }}">{{ bus.plate_number }}</option>
+                        <option value="{{ bus.bus_id }}">{{ bus.plate_number }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -57,28 +57,20 @@
                     <label for="employee">Employee</label>
                     <select name="employee" id="employee">
                         {% for employee in employees %}
-                        <option value="{{ employee.id }}">{{ employee.first_name }} {{ employee.last_name }}</option>
+                        <option value="{{ employee.employee_id }}">{{ employee.first_name }} {{ employee.last_name }}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="route">Route</label>
-                    <input type="text" id="route" name="route" required>
-                </div>
-                <div class="form-group">
-                    <label for="departure_time">Departure Time</label>
-                    <input type="datetime-local" id="departure_time" name="departure_time" required>
-                </div>
-                <div class="form-group">
-                    <label for="arrival_time">Arrival Time</label>
-                    <input type="datetime-local" id="arrival_time" name="arrival_time" required>
+                    <input type="text" id="route" name="route" value="{{ route}}" required>
                 </div>
                 <div class="form-group">
                     <label for="notes">Notes</label>
-                    <textarea id="notes" name="notes" rows="4" placeholder="Add any additional information here..."></textarea>
+                    <textarea id="notes" name="notes" rows="4" placeholder="Add any additional information here..." value="{{ notes }}"></textarea>
                 </div>
 
-                <button type="submit" class="btn">Save Schedule</button>
+                <button type="submit" class="save-btn btn">Save Schedule</button>
             </form>
         </div>
     </div>

@@ -3,21 +3,35 @@ from django.utils import timezone
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
+from bms_bus_information_management.models import Bus
 from bms_bus_schedule_management.forms import ScheduleForm
 from bms_bus_schedule_management.models import Schedule
 from django.core.paginator import Paginator
 
+from bms_driversworkers_management.models import Employee
+
 # Create your views here.
 @login_required
 def add_schedule(request):
+    buses = Bus.objects.filter(user=request.user)  # Fetch buses
+    employees = Employee.objects.filter(user=request.user)  # Fetch employees filtered by user
+    form = ScheduleForm()  # Initialize your form
+    
     if request.method == "POST":
         form = ScheduleForm(request.POST)  # Pass user to the form
         if form.is_valid():
             form.save()  # Save the schedule with the selected bus
             return redirect('schedule_list')  # Redirect after saving
+        else:
+            print(form.errors)  # Debugging
     else:
+        
         form = ScheduleForm()  # Initialize form without user context
-    return render(request, 'bms_bus_schedule_management/add_schedule.html', {'form': form})
+    return render(request, 'bms_bus_schedule_management/home_page_schedule.html', {
+        'form': form,
+        'buses': buses,
+        'employees': employees,
+    })
 
 @login_required
 def edit_schedule(request, sched_id):
@@ -40,8 +54,17 @@ def delete_schedule(request, sched_id):
     return render(request, 'bms_bus_schedule_management/confirm_delete_schedule.html', {'object': schedule})
 
 def schedule_list(request):
-    schedules = Schedule.objects.filter(bus__user=request.user)
-    return render(request, 'bms_bus_schedule_management/home_page_schedule.html', {'schedules': schedules})
+    schedules = Schedule.objects.filter(bus__user=request.user)  # Fetch schedules
+    buses = Bus.objects.filter(user=request.user)  # Fetch buses
+    employees = Employee.objects.filter(user=request.user)  # Fetch employees filtered by user
+    form = ScheduleForm()  # Initialize your form
+
+    return render(request, 'bms_bus_schedule_management/home_page_schedule.html', {
+        'schedules': schedules,
+        'buses': buses,
+        'employees': employees,
+        'form': form,
+    })
 
 def schedule_history(request, sched_id):
     schedule = get_object_or_404(Schedule, pk=sched_id)
