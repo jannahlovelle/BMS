@@ -6,150 +6,11 @@
     <title>Home Page</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidenav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/scripts.js' %}"></script>
-    <style>
-        /* Add styling for sidenav and transition effects */
-        .sidenav {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: #111;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-        }
-
-        .sidenav a {
-            padding: 8px 8px 8px 32px;
-            text-decoration: none;
-            font-size: 20px;
-            color: #818181;
-            display: block;
-            transition: 0.3s;
-        }
-
-        .sidenav a:hover {
-            color: #f1f1f1;
-        }
-
-        .sidenav .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-        }
-
-        .open-nav-btn {
-            font-size: 30px;
-            cursor: pointer;
-            margin: 10px;
-            color: #111;
-        }
-
-        #main {
-            transition: margin-left 0.5s;
-            padding: 16px;
-        }
-
-        .navbar .profile p {
-            position: relative;  /* Enable the top property to work */
-            bottom: 1.9rem;  /* Position it 20rem from its normal position */
-            right: 0rem;
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-            z-index: 1;
-        }
-
-        .navbar .profile img {
-            position: relative;  /* Enable the top property to work */
-            top: 2rem;
-            right: 4.5rem;
-            width: 60px;
-        }
-
-        @media screen and (max-height: 450px) {
-            .sidenav { padding-top: 15px; }
-            .sidenav a { font-size: 18px; }
-        }
-        
-        /* Modal Styling */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5); /* Dim background */
-        }
-
-        .modal-content {
-            background-color: #fff;
-            margin: 10% auto;
-            padding: 20px;
-            border-radius: 8px;
-            width: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            position: relative;
-        }
-
-        .modal-content h2 {
-            margin-top: 0;
-            font-size: 24px;
-        }
-
-        .modal-content label {
-            display: block;
-            margin-top: 10px;
-            font-size: 14px;
-        }
-
-        .modal-content input,
-        .modal-content select {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .modal-content button {
-            background-color: #007BFF;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .modal-content button:hover {
-            background-color: #0056b3;
-        }
-
-        .close {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 24px;
-            font-weight: bold;
-            color: #aaa;
-            cursor: pointer;
-        }
-
-        .close:hover {
-            color: #000;
-        }
-    </style>
 </head>
 <body>
     <!-- Side Navigation -->
@@ -163,29 +24,18 @@
         <a href="{% url 'schedule_list' %}"><i class="fa fa-fw fa-calendar"></i> Schedules</a>
         <a href="{% url 'repair_list' %}"><i class="fa fa-fw fa-wrench"></i> Repairs</a>
         <a href="{% url 'employee_list' %}"><i class="fa fa-fw fa-users"></i> Employees</a>
+        <a href="{% url 'profile' %}"><i class="fa fa-fw fa-user"></i> Profile</a>
         <a href="{% url 'logout' %}"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
     </div>
 
     <!-- Navbar Section -->
     <div class="navbar">
         <span class="open-nav-btn" onclick="openNav()">&#9776; Menu</span>
-        <div class="profile">
-            <a href="{% url 'profile' %}" style="margin-right: 4rem;">
-                <img src="{% static 'images/profile-icon.png' %}" alt="Profile">
-            </a>
-            <p class="hello-admin">Hello Admin!</p>
-        </div>
     </div>
 
     <!-- Main Content -->
     <div id="main" class="container">
         <!-- Tab Section -->
-        <div class="tabs">
-            <a href="{% url 'bus_list' %}"><button class="tab-btn active">Buses</button></a>
-            <a href="{% url 'schedule_list' %}"><button class="tab-btn">Bus Schedules</button></a>
-            <a href="{% url 'repair_list' %}"><button class="tab-btn">Active Repairs</button></a>
-        </div>
-
         <!-- Search and Add Section -->
         <div class="schedule-section">
             <button class="add-btn">Add New Bus +</button>
@@ -194,7 +44,7 @@
         <!-- Modal Structure -->
         <div id="addBusModal" class="modal">
             <div class="modal-content">
-                <span class="close" id="closeModal">&times;</span>
+                <span class="close" id="closeAddEmployeeModal">&times;</span>
                 <h2>Add New Bus</h2>
                 <!-- Form that will be submitted via POST to the add_bus view -->
                 <form method="POST" action="{% url 'add_bus' %}">

@@ -4,8 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
     <style>
         /* General Body Styling */
+        /* Add styling for sidenav and transition effects */
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        .open-nav-btn {
+            font-size: 30px;
+            cursor: pointer;
+            margin: 10px;
+            color: #111;
+        }
+
+        #main {
+            transition: margin-left 0.5s;
+            padding: 16px;
+        }
+
+        .navbar .profile p {
+            position: relative;  /* Enable the top property to work */
+            bottom: 1.9rem;  /* Position it 20rem from its normal position */
+            right: 0rem;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            z-index: 1;
+        }
+
+        .navbar .profile img {
+            position: relative;  /* Enable the top property to work */
+            top: 2rem;
+            right: 4.5rem;
+            width: 60px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav { padding-top: 15px; }
+            .sidenav a { font-size: 18px; }
+        }
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f7f7f7;
@@ -55,7 +128,7 @@
         /* Form Styling */
         form {
             width: 100%;
-            max-width: 500px;
+            max-width: 800px;
             background-color: #fff;
             padding: 30px;
             border-radius: 8px;
@@ -118,22 +191,31 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>User Profile</h1>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <img src="{% static 'images/logo.png' %}" alt="Logo" style="width: 100px; height: 100px; border-radius: 50%;">
+        </div>
+        <a href="{% url 'dashboard' %}"><i class="fa fa-fw fa-tachometer"></i> Dashboard</a>
+        <a href="{% url 'bus_list' %}"><i class="fa fa-fw fa-bus"></i> Buses</a>
+        <a href="{% url 'schedule_list' %}"><i class="fa fa-fw fa-calendar"></i> Schedules</a>
+        <a href="{% url 'repair_list' %}"><i class="fa fa-fw fa-wrench"></i> Repairs</a>
+        <a href="{% url 'employee_list' %}"><i class="fa fa-fw fa-users"></i> Employees</a>
+        <a href="{% url 'profile' %}"><i class="fa fa-fw fa-user"></i> Profile</a>
+        <a href="{% url 'logout' %}"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
+    </div>
 
-        <!-- Display Profile Picture -->
-        {% if profile.profile_picture %}
-            <div class="profile-picture">
-                <img src="{{ profile.profile_picture.url }}" alt="Profile Picture">
-            </div>
-        {% else %}
-            <p>No profile picture available.</p>
-        {% endif %}
+    <div class="navbar">
+        <span class="open-nav-btn" onclick="openNav()">&#9776; Menu</span>
+    </div>
 
-        <h2>Edit Profile</h2>
+    <div class="container" id="main">
         
+        <a href="{% url 'home_page' %}" class="back-link">Back to Home</a>
         <!-- Form to Edit Profile -->
         <form method="POST" enctype="multipart/form-data">
+            <h1>User Profile</h1>
+        <h2>Edit Profile</h2>
             {% csrf_token %}
             {{ user_form.as_p }} <!-- Render User Form -->
 
@@ -142,7 +224,7 @@
         </form>
 
         <!-- Back to Home Link -->
-        <a href="{% url 'home_page' %}" class="back-link">Back to Home</a>
+       
     </div>
 </body>
 </html>
