@@ -6,79 +6,13 @@
     <title>User Profile</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidenav.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/scripts.js' %}"></script>
     <style>
         /* General Body Styling */
         /* Add styling for sidenav and transition effects */
-        .sidenav {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: #111;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-        }
-
-        .sidenav a {
-            padding: 8px 8px 8px 32px;
-            text-decoration: none;
-            font-size: 20px;
-            color: #818181;
-            display: block;
-            transition: 0.3s;
-        }
-
-        .sidenav a:hover {
-            color: #f1f1f1;
-        }
-
-        .sidenav .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-        }
-
-        .open-nav-btn {
-            font-size: 30px;
-            cursor: pointer;
-            margin: 10px;
-            color: #111;
-        }
-
-        #main {
-            transition: margin-left 0.5s;
-            padding: 16px;
-        }
-
-        .navbar .profile p {
-            position: relative;  /* Enable the top property to work */
-            bottom: 1.9rem;  /* Position it 20rem from its normal position */
-            right: 0rem;
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-            z-index: 1;
-        }
-
-        .navbar .profile img {
-            position: relative;  /* Enable the top property to work */
-            top: 2rem;
-            right: 4.5rem;
-            width: 60px;
-        }
-
-        @media screen and (max-height: 450px) {
-            .sidenav { padding-top: 15px; }
-            .sidenav a { font-size: 18px; }
-        }
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f7f7f7;
@@ -98,6 +32,9 @@
             box-sizing: border-box;
         }
 
+        .container #back{
+            align-self: flex-start;
+        }
         /* Heading Styling */
         h1 {
             font-size: 28px;
@@ -206,19 +143,82 @@
     </div>
 
     <div class="navbar">
-        <span class="open-nav-btn" onclick="openNav()">&#9776; Menu</span>
+        <span class="open-nav-btn" onclick="openNav()">&#9776;</span>
     </div>
 
     <div class="container" id="main">
         
-        <a href="{% url 'home_page' %}" class="back-link">Back to Home</a>
+        
         <!-- Form to Edit Profile -->
         <form method="POST" enctype="multipart/form-data">
+            <div style="align-self: left;">
+                <a href="{% url 'home_page' %}" class="back-link"><i class="fa fa-fw fa-arrow-left"></i>Back</a>
+            </div>
             <h1>User Profile</h1>
-        <h2>Edit Profile</h2>
+            <h2>Edit Profile</h2>
             {% csrf_token %}
             {{ user_form.as_p }} <!-- Render User Form -->
+            {% if messages %}
+                <div id="snackbar">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <script>
+                $(document).ready(function() {
+                    var snackbar = $("#snackbar");
+                    if (snackbar.length) {
+                        snackbar.addClass("show");
+                        setTimeout(function() {
+                            snackbar.removeClass("show");
+                        }, 3000);
+                    }
+                });
+            </script>
+            <style>
+                #snackbar {
+                    visibility: hidden;
+                    min-width: 250px;
+                    margin-left: -125px;
+                    background-color: #333;
+                    color: #fff;
+                    text-align: center;
+                    border-radius: 2px;
+                    padding: 16px;
+                    position: fixed;
+                    z-index: 1;
+                    left: 50%;
+                    bottom: 30px;
+                    font-size: 17px;
+                }
 
+                #snackbar.show {
+                    visibility: visible;
+                    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+                    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+                }
+
+                @-webkit-keyframes fadein {
+                    from {bottom: 0; opacity: 0;}
+                    to {bottom: 30px; opacity: 1;}
+                }
+
+                @keyframes fadein {
+                    from {bottom: 0; opacity: 0;}
+                    to {bottom: 30px; opacity: 1;}
+                }
+
+                @-webkit-keyframes fadeout {
+                    from {bottom: 30px; opacity: 1;}
+                    to {bottom: 0; opacity: 0;}
+                }
+
+                @keyframes fadeout {
+                    from {bottom: 30px; opacity: 1;}
+                    to {bottom: 0; opacity: 0;}
+                }
+            </style>
             <!-- Submit Button -->
             <button type="submit" name="update_profile" class="submit-btn">Update Profile</button>
         </form>
