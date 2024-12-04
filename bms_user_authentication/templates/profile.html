@@ -4,8 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidenav.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
     <style>
         /* General Body Styling */
+        /* Add styling for sidenav and transition effects */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f7f7f7;
@@ -25,6 +32,9 @@
             box-sizing: border-box;
         }
 
+        .container #back{
+            align-self: flex-start;
+        }
         /* Heading Styling */
         h1 {
             font-size: 28px;
@@ -55,7 +65,7 @@
         /* Form Styling */
         form {
             width: 100%;
-            max-width: 500px;
+            max-width: 800px;
             background-color: #fff;
             padding: 30px;
             border-radius: 8px;
@@ -118,31 +128,103 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>User Profile</h1>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <img src="{% static 'images/logo.png' %}" alt="Logo" style="width: 100px; height: 100px; border-radius: 50%;">
+        </div>
+        <a href="{% url 'dashboard' %}"><i class="fa fa-fw fa-tachometer"></i> Dashboard</a>
+        <a href="{% url 'bus_list' %}"><i class="fa fa-fw fa-bus"></i> Buses</a>
+        <a href="{% url 'schedule_list' %}"><i class="fa fa-fw fa-calendar"></i> Schedules</a>
+        <a href="{% url 'repair_list' %}"><i class="fa fa-fw fa-wrench"></i> Repairs</a>
+        <a href="{% url 'employee_list' %}"><i class="fa fa-fw fa-users"></i> Employees</a>
+        <a href="{% url 'profile' %}"><i class="fa fa-fw fa-user"></i> Profile</a>
+        <a href="{% url 'logout' %}"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
+    </div>
 
-        <!-- Display Profile Picture -->
-        {% if profile.profile_picture %}
-            <div class="profile-picture">
-                <img src="{{ profile.profile_picture.url }}" alt="Profile Picture">
-            </div>
-        {% else %}
-            <p>No profile picture available.</p>
-        {% endif %}
+    <div class="navbar">
+        <span class="open-nav-btn" onclick="openNav()">&#9776;</span>
+    </div>
 
-        <h2>Edit Profile</h2>
+    <div class="container" id="main">
+        
         
         <!-- Form to Edit Profile -->
         <form method="POST" enctype="multipart/form-data">
+            <div style="align-self: left;">
+                <a href="{% url 'home_page' %}" class="back-link"><i class="fa fa-fw fa-arrow-left"></i>Back</a>
+            </div>
+            <h1>User Profile</h1>
+            <h2>Edit Profile</h2>
             {% csrf_token %}
             {{ user_form.as_p }} <!-- Render User Form -->
+            {% if messages %}
+                <div id="snackbar">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <script>
+                $(document).ready(function() {
+                    var snackbar = $("#snackbar");
+                    if (snackbar.length) {
+                        snackbar.addClass("show");
+                        setTimeout(function() {
+                            snackbar.removeClass("show");
+                        }, 3000);
+                    }
+                });
+            </script>
+            <style>
+                #snackbar {
+                    visibility: hidden;
+                    min-width: 250px;
+                    margin-left: -125px;
+                    background-color: #333;
+                    color: #fff;
+                    text-align: center;
+                    border-radius: 2px;
+                    padding: 16px;
+                    position: fixed;
+                    z-index: 1;
+                    left: 50%;
+                    bottom: 30px;
+                    font-size: 17px;
+                }
 
+                #snackbar.show {
+                    visibility: visible;
+                    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+                    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+                }
+
+                @-webkit-keyframes fadein {
+                    from {bottom: 0; opacity: 0;}
+                    to {bottom: 30px; opacity: 1;}
+                }
+
+                @keyframes fadein {
+                    from {bottom: 0; opacity: 0;}
+                    to {bottom: 30px; opacity: 1;}
+                }
+
+                @-webkit-keyframes fadeout {
+                    from {bottom: 30px; opacity: 1;}
+                    to {bottom: 0; opacity: 0;}
+                }
+
+                @keyframes fadeout {
+                    from {bottom: 30px; opacity: 1;}
+                    to {bottom: 0; opacity: 0;}
+                }
+            </style>
             <!-- Submit Button -->
             <button type="submit" name="update_profile" class="submit-btn">Update Profile</button>
         </form>
 
         <!-- Back to Home Link -->
-        <a href="{% url 'home_page' %}" class="back-link">Back to Home</a>
+       
     </div>
 </body>
 </html>

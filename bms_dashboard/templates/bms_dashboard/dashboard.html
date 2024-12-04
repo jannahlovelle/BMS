@@ -7,68 +7,11 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidenav.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/scripts.js' %}"></script>
-    <style>
-        /* Add styling for sidenav and transition effects */
-        .sidenav {
-            height: 100%;
-            width: 250px;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: -250px;
-            background-color: #111;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-        }
-
-        .sidenav a {
-            padding: 8px 8px 8px 32px;
-            text-decoration: none;
-            font-size: 20px;
-            color: #818181;
-            display: block;
-            transition: 0.3s;
-        }
-
-        .sidenav a:hover {
-            color: #f1f1f1;
-        }
-
-        .sidenav .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-        }
-
-        .open-nav-btn {
-            font-size: 30px;
-            cursor: pointer;
-            margin: 10px;
-            color: #111;
-        }
-
-        #main {
-            transition: margin-left 0.5s;
-            padding: 16px;
-            margin-left: 0;
-        }
-
-        .sidenav-open #main {
-            margin-left: 250px;
-        }
-
-        @media screen and (max-height: 450px) {
-            .sidenav { padding-top: 15px; }
-            .sidenav a { font-size: 18px; }
-        }
-    </style>
-    <script>
+    <!-- <script>
         function openNav() {
             document.getElementById("mySidenav").style.left = "0";
             document.getElementById("main").classList.add("sidenav-open");
@@ -78,7 +21,7 @@
             document.getElementById("mySidenav").style.left = "-250px";
             document.getElementById("main").classList.remove("sidenav-open");
         }
-    </script>
+    </script> -->
 </head>
 <body>
     <!-- Side Navigation -->
@@ -92,22 +35,19 @@
         <a href="{% url 'schedule_list' %}"><i class="fa fa-fw fa-calendar"></i> Schedules</a>
         <a href="{% url 'repair_list' %}"><i class="fa fa-fw fa-wrench"></i> Repairs</a>
         <a href="{% url 'employee_list' %}"><i class="fa fa-fw fa-users"></i> Employees</a>
+        <a href="{% url 'profile' %}"><i class="fa fa-fw fa-user"></i> Profile</a>
         <a href="{% url 'logout' %}"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
     </div>
 
     <!-- Navbar Section -->
     <div class="navbar">
-        <span class="open-nav-btn" onclick="openNav()">&#9776; Menu</span>
-        <div class="profile">
-            <a href="{% url 'profile' %}" style="margin-right: 4rem;">
-                <img src="{% static 'images/profile-icon.png' %}" alt="Profile">
-            </a>
-        </div>
+        <span class="open-nav-btn" onclick="openNav()">&#9776;</span>
+        <p>Welcome, {{ user.username }}</p>
     </div>
 
     <div class="container" id="main">
-        <h2>Dashboard</h2>
         <div class="metrics">
+            <h2>Dashboard</h2>
             <div class="metric">
                 <h3>Total Buses</h3>
                 <p>{{ total_buses }}</p>
@@ -116,6 +56,9 @@
                 <h3>Total Employees</h3>
                 <p>{{ total_employees }}</p>
             </div>
+            
+        </div>
+        <div class="metrics">
             <div class="metric">
                 <h3>Buses in Operation</h3>
                 <p>{{ buses_in_operation }}</p>
@@ -125,15 +68,6 @@
                 <p>{{ buses_under_maintenance }}</p>
             </div>
         </div>
-        <div class="quick-links">
-            <a href="{% url 'add_bus' %}">Add New Bus</a>
-            <a href="{% url 'add_employee' %}">Add New Employee</a>
-            <a href="{% url 'add_schedule' %}">Add New Schedule</a>
-            <a href="{% url 'bus_list' %}">View All Buses</a>
-            <a href="{% url 'employee_list' %}">View All Employees</a>
-            <a href="{% url 'schedule_list' %}">View All Schedules</a>
-            <a href="{% url 'repair_list' %}">View All Repair Records</a>
-        </div>
         <div class="recent-activities">
             <h3>Recent Activities</h3>
             <ul>
@@ -142,20 +76,7 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="notifications">
-            <h3>Notifications</h3>
-            <ul>
-                {% for notification in notifications %}
-                    <li>{{ notification }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="charts">
-            <h3>Statistics</h3>
-            <div id="bus-usage-chart"></div>
-            <div id="maintenance-trends-chart"></div>
-            <div id="employee-performance-chart"></div>
-        </div>
     </div>
+
 </body>
 </html>

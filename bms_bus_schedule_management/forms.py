@@ -14,4 +14,5 @@ class ScheduleForm(forms.ModelForm):
 
     class Meta:
         model = Schedule
-        fields = ['route', 'status', 'bus', 'employee' ,'frequency', 'notes']
+        fields = ['bus', 'employee' ,'route', 'notes']
+        

@@ -2,24 +2,28 @@
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
     document.getElementById("main").style.marginLeft = "250px";
-    // Save the menu state in localStorage
     localStorage.setItem("menuState", "open");
 }
 
 // Function to close the side menu
 function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
-    // Save the menu state in localStorage
+    document.getElementById("mySidenav").style.width = "0px";
+    document.getElementById("main").style.marginLeft = "0px";
     localStorage.setItem("menuState", "closed");
 }
 
 // Function to initialize the side menu state
 function initMenuState() {
     const menuState = localStorage.getItem("menuState");
+    const sidenav = document.getElementById("mySidenav");
+    const main = document.getElementById("main");
+
     if (menuState === "open") {
-        // Open the menu if the state is "open"
-        openNav();
+        sidenav.style.width = "250px";
+        main.style.marginLeft = "250px";
+    } else {
+        sidenav.style.width = "50px";
+        main.style.marginLeft = "50px";
     }
 }
 
