@@ -1,4 +1,3 @@
-
 from django.utils import timezone
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -7,8 +6,6 @@ from bms_bus_information_management.models import Bus
 from bms_bus_schedule_management.forms import ScheduleForm
 from bms_bus_schedule_management.models import Schedule
 from django.core.paginator import Paginator
-from bms_bus_information_management.models import Bus
-from bms_bus_schedule_management.models import Employee
 
 from bms_driversworkers_management.models import Employee
 
@@ -25,7 +22,7 @@ def add_schedule(request):
             form.save()  # Save the schedule with the selected bus
             return redirect('schedule_list')  # Redirect after saving
         else:
-            print("Form errors:",form.errors)  # Debugging
+            print(form.errors)  # Debugging
     else:
         
         form = ScheduleForm()  # Initialize form without user context
@@ -56,7 +53,7 @@ def delete_schedule(request, sched_id):
     return render(request, 'bms_bus_schedule_management/confirm_delete_schedule.html', {'object': schedule})
 
 def schedule_list(request):
-    schedules = Schedule.objects.all()  # Filter schedules by user
+    schedules = Schedule.objects.filter(bus__user=request.user)  # Fetch schedules
     buses = Bus.objects.filter(user=request.user)  # Fetch buses
     employees = Employee.objects.filter(user=request.user)  # Fetch employees filtered by user
     form = ScheduleForm()  # Initialize your form
@@ -104,4 +101,3 @@ def stop_schedule(request, sched_id):
         schedule.arrival_time = None
         schedule.save()
     return redirect('schedule_list')
-

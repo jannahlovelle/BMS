@@ -21,9 +21,9 @@
         </div>
         <a href="{% url 'dashboard' %}"><i class="fa fa-fw fa-tachometer"></i> Dashboard</a>
         <a href="{% url 'bus_list' %}"><i class="fa fa-fw fa-bus"></i> Buses</a>
+        <a href="{% url 'employee_list' %}"><i class="fa fa-fw fa-users"></i> Employees</a>
         <a href="{% url 'schedule_list' %}"><i class="fa fa-fw fa-calendar"></i> Schedules</a>
         <a href="{% url 'repair_list' %}"><i class="fa fa-fw fa-wrench"></i> Repairs</a>
-        <a href="{% url 'employee_list' %}"><i class="fa fa-fw fa-users"></i> Employees</a>
         <a href="{% url 'profile' %}"><i class="fa fa-fw fa-user"></i> Profile</a>
         <a href="{% url 'logout' %}"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
     </div>
@@ -31,7 +31,7 @@
     <!-- Navbar Section -->
     <div class="navbar">
         <span class="open-nav-btn" onclick="openNav()">&#9776;</span>
-        <p>Welcome, {{ user.username }}</p>
+        <p>Welcome, {{ user.first_name|default:user.username }}</p>
     </div>
 
     <!-- Main Content -->
@@ -39,59 +39,43 @@
         <h1>Schedule List</h1>
         <!-- Add Button -->
         <button id="openModalBtn" class="add-btn">Add New Schedule +</button>
-
         <!-- Modal for Adding a Schedule -->
-        <div id="addScheduleModal" class="modal">
-            <div class="modal-content">
-                <span class="close-modal" id="closeModalBtn">&times;</span>
-                <h2>Add New Schedule</h2>
-                <form action="{% url 'add_schedule' %}" method="POST">
-                    {% csrf_token %}
-                    
-                    <div class="form-group">
-                        <label for="bus">Bus</label>
-                        {{ form.bus }}
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="employee">Employee</label>
-                        {{ form.employee }}
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="route">Route</label>
-                        {{ form.route }}
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="departure_time">Departure Time</label>
-                        {{ form.departure_time }}
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="arrival_time">Arrival Time</label>
-                        {{ form.arrival_time }}
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="status">Status</label>
-                        {{ form.status }}
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="frequency">Frequency</label>
-                        {{ form.frequency }}
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="notes">Notes</label>
-                        {{ form.notes }}
-                    </div>
-                    
-                    <button type="submit" class="save-btn btn">Save Schedule</button>
-                </form>
-            </div>
+    <div id="addScheduleModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModalBtn">&times;</span>
+            <h2>Add New Schedule</h2>
+            <form action="{% url 'add_schedule' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="bus">Bus</label>
+                    <select name="bus" id="bus">
+                        {% for bus in buses %}
+                        <option value="{{ bus.bus_id }}">{{ bus.plate_number }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="employee">Employee</label>
+                    <select name="employee" id="employee">
+                        {% for employee in employees %}
+                        <option value="{{ employee.employee_id }}">{{ employee.first_name }} {{ employee.last_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="route">Route</label>
+                    <input type="text" id="route" name="route" value="{{ route}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Notes</label>
+                    <textarea id="notes" name="notes" rows="4" placeholder="Add any additional information here..." value="{{ notes }}"></textarea>
+                </div>
+
+                <button type="submit" class="save-btn btn">Save Schedule</button>
+            </form>
         </div>
+    </div>
+    
 
         <table class="bus-table">
             <thead>
@@ -137,7 +121,7 @@
                             <a href="{% url 'delete_schedule' schedule.sched_id %}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
-                {% empty %}
+                    {% empty %}
                     <tr>
                         <td colspan="8">No schedules found.</td>
                     </tr>
@@ -153,20 +137,20 @@
     const openModalBtn = document.getElementById('openModalBtn');
     const closeModalBtn = document.getElementById('closeModalBtn');
 
-    // Open the modal
-    openModalBtn.addEventListener("click", function () {
-        modal.style.display = "block";
+    // Open modal
+    openModalBtn.addEventListener('click', () => {
+        modal.style.display = 'block';
     });
 
-    // Close the modal
-    closeModalBtn.addEventListener("click", function () {
-        modal.style.display = "none";
+    // Close modal
+    closeModalBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
     });
 
     // Close modal when clicking outside of it
-    window.addEventListener("click", function (event) {
+    window.addEventListener('click', (event) => {
         if (event.target === modal) {
-            modal.style.display = "none";
+            modal.style.display = 'none';
         }
     });
 </script>

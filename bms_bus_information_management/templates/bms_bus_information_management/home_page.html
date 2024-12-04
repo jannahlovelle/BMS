@@ -21,9 +21,9 @@
         </div>
         <a href="{% url 'dashboard' %}"><i class="fa fa-fw fa-tachometer"></i> Dashboard</a>
         <a href="{% url 'bus_list' %}"><i class="fa fa-fw fa-bus"></i> Buses</a>
+        <a href="{% url 'employee_list' %}"><i class="fa fa-fw fa-users"></i> Employees</a>
         <a href="{% url 'schedule_list' %}"><i class="fa fa-fw fa-calendar"></i> Schedules</a>
         <a href="{% url 'repair_list' %}"><i class="fa fa-fw fa-wrench"></i> Repairs</a>
-        <a href="{% url 'employee_list' %}"><i class="fa fa-fw fa-users"></i> Employees</a>
         <a href="{% url 'profile' %}"><i class="fa fa-fw fa-user"></i> Profile</a>
         <a href="{% url 'logout' %}"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
     </div>
@@ -31,13 +31,15 @@
     <!-- Navbar Section -->
     <div class="navbar">
         <span class="open-nav-btn" onclick="openNav()">&#9776;</span>
+        <p>Welcome, {{ user.first_name|default:user.username }}</p>
     </div>
-
     <!-- Main Content -->
     <div id="main" class="container">
         <!-- Tab Section -->
         <!-- Search and Add Section -->
+         
         <div class="schedule-section">
+            <h1>Bus List</h1>
             <button class="add-btn">Add New Bus +</button>
         </div>
 

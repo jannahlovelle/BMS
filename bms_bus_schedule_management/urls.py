@@ -1,4 +1,3 @@
-
 from django.urls import path
 from bms_bus_schedule_management import views
 
