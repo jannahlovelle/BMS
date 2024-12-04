@@ -94,23 +94,25 @@
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Job Title</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for employee in employees %}
-                    <tr>
+                    <tr class="{% if employee.status == 'inactive' %}inactive{% else %}active{% endif %}">
                         <td>
                             {% if employee.photo %}
-                                <img src="{{ employee.photo.url }}" alt="{{ employee.first_name }} {{ employee.last_name }}" style="width: 50px; height: auto;">
+                                <img src="{{ employee.photo.url }}" alt="{{ employee.first_name }} {{ employee.last_name }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
                             {% else %}
-                                No photo found.
+                                <img src="{% static 'images/default.png' %}" alt="Default" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
                             {% endif %}
                         </td>
                         <td>{{ employee.first_name }}</td>
                         <td>{{ employee.last_name }}</td>
                         <td>{{ employee.email }}</td>
                         <td>{{ employee.job_title }}</td>
+                        <td><span class="status {{ employee.get_status_display | lower }}">{{ employee.get_status_display }}</span></td>
                         <td>
                             <a href="{% url 'edit_employee' employee.employee_id %}">Edit</a> | 
                             <a href="{% url 'delete_employee' employee.employee_id %}">Delete</a>

@@ -31,5 +31,7 @@ function setupModal(modalId, openButtonClass, closeButtonId) {
 }
 
 // Apply the modal logic for both the "Add Bus" and "Add Employee" modals
-setupModal("addBusModal", "add-btn", "closeModalButton"); // For "Add New Bus" modal
-setupModal("addEmployeeModal", "openAddEmployeeModal", "closeAddEmployeeModal"); // For "Add New Employee" modal
+document.addEventListener("DOMContentLoaded", () => {
+    setupModal("addBusModal", ".add-btn", ".close-modal"); // For "Add New Bus" modal
+    setupModal("addEmployeeModal", "openAddEmployeeModal", "closeAddEmployeeModal"); // For "Add New Employee" modal
+});

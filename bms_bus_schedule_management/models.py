@@ -14,8 +14,8 @@ class Schedule(models.Model):
         ('in_transit', 'In Transit'),
         ('arrived', 'Arrived'),
     ], default='on_standby')
-    bus = models.ForeignKey(Bus, on_delete=models.CASCADE, unique=True)
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='schedules', null=True, blank=True, unique=True)
+    bus = models.OneToOneField(Bus, on_delete=models.CASCADE, unique=True)
+    employee = models.OneToOneField(Employee, on_delete=models.CASCADE, related_name='schedules', null=True, blank=True, unique=True)
     last_updated = models.DateTimeField(auto_now=True)
     # New fields
     frequency = models.CharField(max_length=50, null=True, blank=True, default=1)  # e.g., daily, weekly

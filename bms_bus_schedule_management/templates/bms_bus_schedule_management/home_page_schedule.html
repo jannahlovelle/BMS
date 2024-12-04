@@ -50,17 +50,25 @@
                 <div class="form-group">
                     <label for="bus">Bus</label>
                     <select name="bus" id="bus">
-                        {% for bus in buses %}
-                        <option value="{{ bus.bus_id }}">{{ bus.plate_number }}</option>
-                        {% endfor %}
+                        {% if buses %}
+                            {% for bus in buses %}
+                                <option value="{{ bus.bus_id }}">{{ bus.plate_number }}</option>
+                            {% endfor %}
+                        {% else %}
+                            <option value="">No buses available</option>
+                        {% endif %}
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="employee">Employee</label>
                     <select name="employee" id="employee">
-                        {% for employee in employees %}
-                        <option value="{{ employee.employee_id }}">{{ employee.first_name }} {{ employee.last_name }}</option>
-                        {% endfor %}
+                        {% if employees %}
+                            {% for employee in employees %}
+                                <option value="{{ employee.employee_id }}">{{ employee.first_name }} {{ employee.last_name }}</option>
+                            {% endfor %}
+                        {% else %} 
+                            <option value="">No employees available</option>
+                        {% endif %}   
                     </select>
                 </div>
                 <div class="form-group">

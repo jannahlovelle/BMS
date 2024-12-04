@@ -54,12 +54,12 @@ def delete_repair(request, pk):
 def repair_list(request):
     repairs = Repair.objects.all()
     buses = Bus.objects.filter(user=request.user)  # Fetch buses
-    employees = Employee.objects.filter(user=request.user)  # Fetch employees filtered by user
-    form = RepairForm()
+    employees = Employee.objects.filter(user=request.user, status='active', job_title='mechanic')  # Fetch active mechanics filtered by user
+    form = RepairForm(user=request.user)
 
     return render(request, 'bms_maintenancerepair_management/home_page_repair.html', {
         'repairs': repairs,
         'buses': buses,
         'employees': employees,
-        'form': form,
+        'form': form
     })

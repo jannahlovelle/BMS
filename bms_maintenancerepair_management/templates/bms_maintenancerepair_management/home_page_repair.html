@@ -41,7 +41,7 @@
         <!-- Modal Structure -->
         <div id="addRepairModal" class="modal">
             <div class="modal-content">
-                <span class="close" id="closeModal">&times;</span>
+                <span class="close-modal" id="closeModal">&times;</span>
                 <h2>Add Repair</h2>
                 <!-- Form that will be submitted via POST to the add_bus view -->
                 <form method="POST" action="{% url 'add_repair' %}">
@@ -93,7 +93,7 @@
                         {{ form.follow_action }}
                     </div>
 
-                    <button type="submit">Save</button>
+                    <button type="submit" class="save-btn">Save</button>
                 </form>
             </div>
         </div>
@@ -120,7 +120,7 @@
                         <td>{{ repair.repair_desc }}</td>
                         <td>{{ repair.start_date }}</td>
                         <td>{{ repair.est_completion }}</td>
-                        <td>{{ repair.status }}</td>
+                        <td><span class="status {{ repair.get_status_display | lower}}">{{ repair.get_status_display }}</span></td>
                         <td>{{ repair.employee.first_name }} {{ repair.employee.last_name }}</td>
                         <td>
                             <a href="{% url 'edit_repair' repair.pk %}">Edit</a> | 
@@ -145,7 +145,7 @@
     // Get modal elements
     const modal = document.getElementById("addRepairModal");
     const addButton = document.querySelector(".add-btn"); // Add New Bus button
-    const closeButton = document.querySelector(".close"); // Close button in modal
+    const closeButton = document.querySelector(".close-modal"); // Close button in modal
 
     // Open the modal when clicking "Add New Bus"
     addButton.addEventListener("click", (e) => {

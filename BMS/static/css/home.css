@@ -116,12 +116,12 @@ body {
     font-weight: bold;
 }
 
-.status.maintenance {
+.status.maintenance, .status.inactive {
     color: red;
     font-weight: bold;
 }
 
-.status.standby {
+.status.standby, .status.active {
     color: green;
     font-weight: bold;
 }
@@ -131,3 +131,10 @@ body {
     font-weight: bold;
     font-size: 16px;  /* Increased font size for emphasis */
 }
+
+/* Inactive row styling */
+tr.inactive {
+    opacity: 0.6;
+    background-color: #ecdcdc;
+}
+/* Active row styling */

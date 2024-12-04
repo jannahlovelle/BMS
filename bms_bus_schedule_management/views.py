@@ -55,7 +55,7 @@ def delete_schedule(request, sched_id):
 def schedule_list(request):
     schedules = Schedule.objects.filter(bus__user=request.user)  # Fetch schedules
     buses = Bus.objects.filter(user=request.user)  # Fetch buses
-    employees = Employee.objects.filter(user=request.user)  # Fetch employees filtered by user
+    employees = Employee.objects.filter(user=request.user, status="active", job_title="driver")  # Fetch employees filtered by user
     form = ScheduleForm()  # Initialize your form
 
     return render(request, 'bms_bus_schedule_management/home_page_schedule.html', {

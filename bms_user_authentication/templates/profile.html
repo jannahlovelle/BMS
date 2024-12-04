@@ -10,124 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/scripts.js' %}"></script>
-    <style>
-        /* General Body Styling */
-        /* Add styling for sidenav and transition effects */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f7f7f7;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Container Styling */
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #fff;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .container #back{
-            align-self: flex-start;
-        }
-        /* Heading Styling */
-        h1 {
-            font-size: 28px;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        /* Profile Picture */
-        .profile-picture {
-            border-radius: 50%;
-            margin-bottom: 20px;
-        }
-
-        .profile-picture img {
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-        }
-
-        /* Edit Profile Section */
-        h2 {
-            font-size: 22px;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        /* Form Styling */
-        form {
-            width: 100%;
-            max-width: 800px;
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            box-sizing: border-box;
-        }
-
-        form label {
-            font-size: 16px;
-            color: #555;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        form input {
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        form input:focus {
-            outline: none;
-            border-color: #2874d1;
-            box-shadow: 0 0 8px rgba(76, 175, 80, 0.2);
-        }
-
-        /* Submit Button */
-        .submit-btn {
-            width: 100%;
-            padding: 12px;
-            background-color: #2874d1;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            background-color: #2874d1;
-        }
-
-        /* Back Link */
-        .back-link {
-            text-align: center;
-            font-size: 16px;
-            color: #007BFF;
-            text-decoration: none;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
-        }
-    </style>
 </head>
 <body>
+    <!-- Side Navigation -->
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div style="text-align: center; margin-bottom: 20px;">
@@ -148,86 +33,94 @@
         <h2>Bus Management System</h2>
         <p>Welcome, {{ user.first_name|default:user.username }}</p>
     </div>
-    
+
+    <!-- Profile Section -->
     <div class="container" id="main">
+        <h1>User Profile</h1>
         
-        
-        <!-- Form to Edit Profile -->
-        <form method="POST" enctype="multipart/form-data">
-            <div style="align-self: left;">
-                <a href="{% url 'home_page' %}" class="back-link"><i class="fa fa-fw fa-arrow-left"></i>Back</a>
-            </div>
-            <h1>User Profile</h1>
-            <h2>Edit Profile</h2>
+        <!-- Profile Form -->
+        <form method="POST" enctype="multipart/form-data" class="profile-form">
             {% csrf_token %}
-            {{ user_form.as_p }} <!-- Render User Form -->
+            <div style="text-align: left;">
+                <a href="{% url 'dashboard' %}" class="back-link"><i class="fa fa-fw fa-arrow-left"></i> Back</a>
+            </div>
+            <h2>Edit Profile</h2>
+            {{ user_form.as_p }}
             {% if messages %}
-                <div id="snackbar">
+                <div class="messages">
                     {% for message in messages %}
                         <p>{{ message }}</p>
                     {% endfor %}
                 </div>
             {% endif %}
-            <script>
-                $(document).ready(function() {
-                    var snackbar = $("#snackbar");
-                    if (snackbar.length) {
-                        snackbar.addClass("show");
-                        setTimeout(function() {
-                            snackbar.removeClass("show");
-                        }, 3000);
-                    }
-                });
-            </script>
-            <style>
-                #snackbar {
-                    visibility: hidden;
-                    min-width: 250px;
-                    margin-left: -125px;
-                    background-color: #333;
-                    color: #fff;
-                    text-align: center;
-                    border-radius: 2px;
-                    padding: 16px;
-                    position: fixed;
-                    z-index: 1;
-                    left: 50%;
-                    bottom: 30px;
-                    font-size: 17px;
-                }
-
-                #snackbar.show {
-                    visibility: visible;
-                    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-                    animation: fadein 0.5s, fadeout 0.5s 2.5s;
-                }
-
-                @-webkit-keyframes fadein {
-                    from {bottom: 0; opacity: 0;}
-                    to {bottom: 30px; opacity: 1;}
-                }
-
-                @keyframes fadein {
-                    from {bottom: 0; opacity: 0;}
-                    to {bottom: 30px; opacity: 1;}
-                }
-
-                @-webkit-keyframes fadeout {
-                    from {bottom: 30px; opacity: 1;}
-                    to {bottom: 0; opacity: 0;}
-                }
-
-                @keyframes fadeout {
-                    from {bottom: 30px; opacity: 1;}
-                    to {bottom: 0; opacity: 0;}
-                }
-            </style>
-            <!-- Submit Button -->
-            <button type="submit" name="update_profile" class="submit-btn">Update Profile</button>
+            <button type="submit" class="submit-btn">Update Profile</button>
         </form>
-
-        <!-- Back to Home Link -->
-       
     </div>
+
+    <style>
+        /* Profile Section Styling */
+        .container{
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 900px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h1 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .container .submit-btn {
+            background-color: #2874d1;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .container .submit-btn:hover {
+            background-color: #2359a8;
+        }
+
+        .container .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .container .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .messages {
+            background-color: #f8d7da;
+            color: #842029;
+            padding: 10px;
+            border: 1px solid #f5c2c7;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .messages p {
+            margin: 0;
+        }
+    </style>
 </body>
 </html>

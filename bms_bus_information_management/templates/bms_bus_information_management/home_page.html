@@ -47,12 +47,11 @@
         <!-- Modal Structure -->
         <div id="addBusModal" class="modal">
             <div class="modal-content">
-                <span class="close" id="closeAddEmployeeModal">&times;</span>
+                <span class="close-modal" id="closeModalButton">&times;</span>
                 <h2>Add New Bus</h2>
                 <!-- Form that will be submitted via POST to the add_bus view -->
                 <form method="POST" action="{% url 'add_bus' %}">
                     {% csrf_token %}
-                    
                     <label for="plate_number">Plate Number:</label>
                     <input type="text" id="plate_number" name="plate_number" value="{{ form.plate_number.value }}" required>
 
@@ -75,7 +74,7 @@
                         <option value="under_maintenance">Under Maintenance</option>
                     </select>
 
-                    <button type="submit">Save</button>
+                    <button type="submit" class="save-btn">Save</button>
                 </form>
             </div>
         </div>
@@ -122,11 +121,10 @@
     <script src="{% static 'js/scripts.js' %}"></script>
     <script>
         // JavaScript for Modal
-
         // Get modal elements
         const modal = document.getElementById("addBusModal");
         const addButton = document.querySelector(".add-btn"); // Add New Bus button
-        const closeButton = document.querySelector(".close"); // Close button in modal
+        const closeButton = document.querySelector(".close-modal"); // Close button in modal
 
         // Open the modal when clicking "Add New Bus"
         addButton.addEventListener("click", (e) => {

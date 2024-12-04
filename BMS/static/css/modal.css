@@ -21,6 +21,7 @@
     width: 50%;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     animation: modalFadeIn 0.3s ease-in-out;
+    margin-top: 0.9%; /* Added space above the modal content */
 }
 
 @keyframes modalFadeIn {

@@ -59,7 +59,7 @@ def delete_employee(request, employee_id):
     return render(request, 'bms_driversworkers_management/confirm_delete_employee.html', {'employee': employee})
 
 def employee_list(request):
-    employees = Employee.objects.filter(user=request.user)
+    employees = Employee.objects.filter(user=request.user).order_by('status', 'first_name')
     return render(request, 'bms_driversworkers_management/home_page_employees.html', {'employees': employees})
 
 # DRIVERSCHEDULE
