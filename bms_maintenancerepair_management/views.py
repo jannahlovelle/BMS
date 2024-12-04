@@ -7,19 +7,20 @@ from bms_driversworkers_management.models import Employee
 
 # Create your views here.
 def add_repair(request):
-    buses = Bus.objects.filter(user=request.user)  # Fetch buses
-    employees = Employee.objects.filter(user=request.user)
-    form = RepairForm()
 
     if request.method == 'POST':
-        form = RepairForm(request.POST)
+        form = RepairForm(request.POST, user=request.user)
         if form.is_valid():
             form.save()
             return redirect('repair_list')  # Replace with your redirect URL
         else:
             print(form.errors)  # Debugging
     else:
-        form = RepairForm()
+        form = RepairForm(user=request.user)
+        
+    buses = Bus.objects.filter(user=request.user)  # Fetch buses
+    employees = Employee.objects.filter(user=request.user)
+
     return render(request, 'bms_maintenancerepair_management/home_page_repair.html', {
         'form': form,
         'buses': buses,

@@ -8,7 +8,7 @@ class Repair(models.Model):
     repair_desc = models.CharField(max_length=100)
     start_date = models.DateTimeField(null=True, blank=True)
     est_completion = models.DateTimeField(null=True, blank=True)
-    status = models.CharField(max_length=100, choices = [('Under Maintenance', 'Under Maintenance'), ('Done', 'Done')])
+    status = models.CharField(max_length=100, choices = [('under_maintenance', 'Under Maintenance'), ('done', 'Done')])
     repair_cost = models.FloatField()
     parts_used = models.CharField(max_length=255)
     follow_action = models.CharField(max_length=255)
