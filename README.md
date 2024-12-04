@@ -1,8 +1,8 @@
+<p align="center">
+    <img src="staticfiles/images/logo.png" alt="BMS Logo" style="border-radius: 50px; width: 200px; height: 200px; object-fit: cover; border: 3px solid #fff;"/>
+</p>
 <h1 align="center">
-    <img src="AMSystem/static/images/AMSystemlogo-dark.png#gh-light-mode-only" alt="AMSystem Logo Light" width="200"/>
-    <img src="AMSystem/static/images/AMSystemlogo-light.png#gh-dark-mode-only" alt="AMSystem Logo Dark" width="200"/>
-    <br>
-    🚌 Bus Management System - CSIT327 G5
+     Bus Management System - CSIT327 G5
 </h1>
 
 <p align="center">
@@ -48,12 +48,22 @@ This system simplifies bus management, offering a user-friendly experience that 
 
 ---
 
-## 📖 **How It Works**
+## 📊 **System Workflow**
 
-1. **Log in as an Admin**: Access the system securely with admin credentials.
-2. **Navigate Through the Dashboard**: Use an intuitive interface to manage various modules.
-3. **Update, Add, or Remove Data**: Make real-time changes to buses, schedules, repairs, or employees.
-4. **Stay Updated**: Track repairs, optimize schedules, and ensure smooth operations.
+### **How to Use:**
+1. **Admin Login**: Access the system securely using admin credentials.
+2. **Manage Operations**:
+   - Add, update, and delete records for buses, employees, and schedules.
+3. **Monitor Repairs**: Stay updated on maintenance needs and track repair logs.
+4. **Optimize Schedules**: Ensure timely and efficient bus operations.
+
+### **System Modules**:
+| Module                | Functionality                              |
+|-----------------------|--------------------------------------------|
+| Bus Management        | Manage bus details (registration, type).  |
+| Schedule Management   | Create and track schedules for buses.     |
+| Maintenance Tracking  | Log and monitor repairs and maintenance.  |
+| Employee Management   | Handle staff information and assignments. |
 
 ---
 
