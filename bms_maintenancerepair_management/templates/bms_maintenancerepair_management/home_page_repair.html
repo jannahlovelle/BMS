@@ -45,50 +45,52 @@
                 <!-- Form that will be submitted via POST to the add_bus view -->
                 <form method="POST" action="{% url 'add_repair' %}">
                     {% csrf_token %}
-                    
-                    <!-- Repair Description -->
-                    <label for="repair_desc">Repair Description:</label>
-                    <input type="text" id="repair_desc" name="repair_desc" value="{{ form.repair_desc.value }}" required>
-                    
-                    <label for="start_date">Start Date:</label>
-                    <input type="date" id="start_date" name="start_date" value="{{ form.start_date.value }}" required>
-
-                    <label for="est_completion">Estimated Completion:</label>
-                    <input type="date" id="est_completion" name="est_completion" value="{{ form.est_completion.value }}" required>
-
-                    <label for="status">Status:</label>
-                    <select id="status" name="status" required>
-                        <option value="under_maintenance">Under Maintenance</option>
-                        <option value="done">Done</option>
-                    </select>
-
-                    <label for="repair_cost">Repair Cost:</label>
-                    <input type="number" id="repair_cost" name="repair_cost" value="{{ form.repair_cost.value }}" required>
-
-                    <label for="parts_used">Parts Used:</label>
-                    <input type="text" id="parts_used" name="parts_used" value="{{ form.parts_used.value }}" required>
-
-                    <label for="follow_action">Follow-up Action:</label>
-                    <input type="text" id="follow_action" name="follow_action" value="{{ form.follow_action.value }}" required>
 
                     <!-- Bus Dropdown -->
-                    <label for="bus">Bus (Plate Number):</label>
-                    <select id="bus" name="bus" required>
-                        {% for bus in buses %}
-                            <option value="{{ bus.id }}">{{ bus.plate_number }} - {{ bus.model }}</option>
-                        {% endfor %}
-                    </select>
+                    <div class="form-group">
+                        <label for="bus">Bus:</label>
+                        {{ form.bus }}
+                    </div>
 
-                    <!-- Employee -->
-                    <label for="employee">Assigned Employee:</label>
-                    <select id="employee" name="employee" required>
-                        {% for employee in employees %}
-                            <option value="{{ employee.id }}">{{ employee.first_name }} {{ employee.last_name }}</option>
-                        {% endfor %}
-                    </select>
+                    <div class="form-group">
+                        <label for="employee">Assigned Employee:</label>
+                        {{ form.employee }}
+                    </div>
 
+                    <div class="form-group">
+                        <label for="repair_desc">Repair Description:</label>
+                        {{ form.repair_desc }}
+                    </div>
 
-                    
+                    <div class="form-group">
+                        <label for="start_date">Start Date:</label>
+                        {{ form.start_date }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="est_completion">Estimated Completion:</label>
+                        {{ form.est_completion }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Status:</label>
+                        {{ form.status }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="repair_cost">Repair Cost:</label>
+                        {{ form.repair_cost }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="parts_used">Parts Used:</label>
+                        {{ form.parts_used }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="follow_action">Follow-up Action:</label>
+                        {{ form.follow_action }}
+                    </div>
 
                     <button type="submit">Save</button>
                 </form>

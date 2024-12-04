@@ -2,21 +2,29 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from bms_maintenancerepair_management.forms import RepairForm
 from bms_maintenancerepair_management.models import Repair
+from bms_bus_information_management.models import Bus
+from bms_driversworkers_management.models import Employee
 
 # Create your views here.
 def add_repair(request):
+    buses = Bus.objects.filter(user=request.user)  # Fetch buses
+    employees = Employee.objects.filter(user=request.user)
+    form = RepairForm()
+
     if request.method == 'POST':
         form = RepairForm(request.POST)
         if form.is_valid():
-            repair = form.save()
-            # Set the bus status to "Under Maintenance"
-            bus = repair.bus
-            bus.status = 'Under Maintenance'
-            bus.save()
+            form.save()
             return redirect('repair_list')  # Replace with your redirect URL
+        else:
+            print(form.errors)  # Debugging
     else:
         form = RepairForm()
-    return render(request, 'bms_maintenancerepair_management/add_repair.html', {'form': form})
+    return render(request, 'bms_maintenancerepair_management/home_page_repair.html', {
+        'form': form,
+        'buses': buses,
+        'employees': employees,
+    })
 
 # Edit a repair
 def edit_repair(request, pk):
@@ -44,5 +52,14 @@ def delete_repair(request, pk):
     return render(request, 'bms_maintenancerepair_management/delete_repair.html', {'repair': repair})
 
 def repair_list(request):
-    repairs = Repair.objects.filter(bus__user=request.user)
-    return render(request, 'bms_maintenancerepair_management/home_page_repair.html', {'repairs': repairs})
+    repairs = Repair.objects.all()
+    buses = Bus.objects.filter(user=request.user)  # Fetch buses
+    employees = Employee.objects.filter(user=request.user)  # Fetch employees filtered by user
+    form = RepairForm()
+
+    return render(request, 'bms_maintenancerepair_management/home_page_repair.html', {
+        'repairs': repairs,
+        'buses': buses,
+        'employees': employees,
+        'form': form,
+    })
