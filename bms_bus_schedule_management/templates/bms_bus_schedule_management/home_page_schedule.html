@@ -105,7 +105,7 @@
                         <td>{{ schedule.route }}</td>
                         <td id="departure-time-{{ schedule.sched_id }}">{{ schedule.departure_time }}</td>
                         <td id="arrival-time-{{ schedule.sched_id }}">{{ schedule.arrival_time }}</td>
-                        <td id="status-{{ schedule.sched_id }}">{{ schedule.get_status_display }}</td>
+                        <td><span class="status {{ schedule.get_status_display | lower}}">{{ schedule.get_status_display }}</span></td>
                         <td>
                             {% if schedule.departure_time is None %}
                                 <button>

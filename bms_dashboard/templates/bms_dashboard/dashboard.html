@@ -42,41 +42,163 @@
     <!-- Navbar Section -->
     <div class="navbar">
         <span class="open-nav-btn" onclick="openNav()">&#9776;</span>
+        <h2>Bus Management System</h2>
         <p>Welcome, {{ user.first_name|default:user.username }}</p>
     </div>
 
+    
     <div class="container" id="main">
         <div class="metrics">
-            <h2>Dashboard</h2>
             <div class="metric">
-                <h3>Total Buses</h3>
-                <p>{{ total_buses }}</p>
+                <!-- Chart container -->
+                 <div>
+                    <h3>Bus Analytics</h3>
+                    <canvas id="chart"></canvas>
+                 </div>
+                
             </div>
             <div class="metric">
-                <h3>Total Employees</h3>
-                <p>{{ total_employees }}</p>
+                <!-- Chart container -->
+                 <div>
+                    <h3>Employee Analytics</h3>
+                    <canvas id="Employeechart"></canvas>
+                 </div>
+                
             </div>
-            
+            <div class="metric">
+                <div class="recent-activities">
+                    <h3>Recent Activities</h3>
+                    <ul>
+                        {% for activity in recent_activities %}
+                            <li>{{ activity }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="metrics">
-            <div class="metric">
-                <h3>Buses in Operation</h3>
-                <p>{{ buses_in_operation }}</p>
-            </div>
-            <div class="metric">
-                <h3>Buses Under Maintenance</h3>
-                <p>{{ buses_under_maintenance }}</p>
-            </div>
-        </div>
-        <div class="recent-activities">
-            <h3>Recent Activities</h3>
-            <ul>
-                {% for activity in recent_activities %}
-                    <li>{{ activity }}</li>
-                {% endfor %}
-            </ul>
-        </div>
+        
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch("{% url 'get_bus_data' %}")
+                .then(response => response.json())
+                .then(data => {
+                    const ctx = document.getElementById('chart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Buses Available', 'Buses in Operation', 'Buses Under Maintenance'],
+                            datasets: [{
+                                label: 'Bus Data',
+                                data: [data.available_buses, data.buses_in_operation, data.buses_under_maintenance],
+                                backgroundColor: ['#4CAF50', '#FFC107', '#F44336']
+                            }]
+                        },
+                        options: {
+                            responsive: true
+                        }
+                    });
+                });
+        });
+    </script> -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch("{% url 'get_bus_data' %}")
+                .then(response => response.json())
+                .then(data => {
+                    if (data.available_buses === 0 && data.buses_in_operation === 0 && data.buses_under_maintenance === 0) {
+                        document.getElementById('chart').parentNode.innerHTML = '<h3>Bus Analytics</h3><br><p>No buses found.</p>';
+                    } else {
+                        const ctx = document.getElementById('chart').getContext('2d');
+                        new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: ['Buses Available', 'Buses in Operation', 'Buses Under Maintenance'],
+                                datasets: [{
+                                    label: 'Bus Data',
+                                    data: [data.available_buses, data.buses_in_operation, data.buses_under_maintenance],
+                                    backgroundColor: ['#4CAF50', '#FFC107', '#F44336']
+                                }]
+                            },
+                            options: {
+                                responsive: true
+                            }
+                        });
+                    }
+                });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch("{% url 'get_employee_data' %}")
+                .then(response => response.json())
+                .then(data => {
+                    if (data.inactive_employees === 0 && data.active_employees === 0) {
+                        document.getElementById('Employeechart').parentNode.innerHTML = '<h3>Employees Analytics</h3><br><p>No employees found.</p>';
+                    } else {
+                        const ctx = document.getElementById('Employeechart').getContext('2d');
+                        new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: ['Active Employees', 'Inactive Employees'],
+                                datasets: [{
+                                    label: 'Employees Data',
+                                    data: [ data.active_employees,data.inactive_employees, ],
+                                    backgroundColor: ['lightBlue', 'pink']
+                                }]
+                                
+                            },
+                            options: {
+                                responsive: true
+                            }
+                        });
+                    }
+                });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch("{% url 'get_bus_schedule_history' %}")
+                .then(response => response.json())
+                .then(data => {
+                    const ctx = document.getElementById('scheduleHistoryChart').getContext('2d');
+                    const labels = data.schedule_history.map(item => item.updated_at);
+                    const counts = data.schedule_history.map(item => item.count);
+
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Bus Schedule History Count',
+                                data: counts,
+                                borderColor: '#4CAF50',
+                                fill: false
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                x: {
+                                    type: 'time',
+                                    time: {
+                                        unit: 'day'
+                                    }
+                                }
+                            }
+                        }
+                    });
+                });
+        });
+    </script>
+
+    
+       
+    
 
 </body>
 </html>

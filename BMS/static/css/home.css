@@ -111,12 +111,12 @@ body {
 }
 
 /* Status styles */
-.status.in-transit {
+.status.transit {
     color: green;
     font-weight: bold;
 }
 
-.status.under-maintenance {
+.status.maintenance {
     color: red;
     font-weight: bold;
 }

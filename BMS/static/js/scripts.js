@@ -22,8 +22,8 @@ function initMenuState() {
         sidenav.style.width = "250px";
         main.style.marginLeft = "250px";
     } else {
-        sidenav.style.width = "50px";
-        main.style.marginLeft = "50px";
+        sidenav.style.width = "0px";
+        main.style.marginLeft = "0px";
     }
 }
 

@@ -101,7 +101,7 @@
                             <td>{{ bus.make }}</td>
                             <td>{{ bus.year }}</td>
                             <td>{{ bus.capacity }}</td>
-                            <td><span class="status {{ bus.get_status_display|lower }}">{{ bus.get_status_display }}</span></td>
+                            <td><span class="status {{ bus.get_status_display | lower}}">{{ bus.get_status_display }}</span></td>
                             <td>
                                 <a href="{% url 'edit_bus' bus.bus_id %}">Edit</a> | 
                                 <a href="{% url 'delete_bus' bus.bus_id %}">Delete</a>
