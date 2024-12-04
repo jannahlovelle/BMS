@@ -136,11 +136,10 @@ body {
 tr.inactive {
     opacity: 0.6;
     background-color: #ecdcdc;
-    button {
-        cursor: not-allowed;
-        background-color: #ddd;
-        color: #999;
-    }
+}
+
+tr.inactive .startstop{
+    pointer-events: none;
 }
 
 /* Button styling */

@@ -2,14 +2,14 @@
 <html>
 <head>
     <title>Edit Bus</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidenav.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
     <style>
         /* General styles for the page */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 10px; /* Reduced padding */
-            background-color: #f0f4f8; /* Light background */
-        }
     
         /* Container for the form */
         .container {
@@ -31,7 +31,14 @@
         /* Styles for form elements */
         form {
             display: flex;
+            width: 50%;
+            margin-top: 50px;
             flex-direction: column; /* Stack elements vertically */
+            background-color: white;
+            border-radius: 25px;
+            padding: 50px;
+            flex-wrap: wrap;
+            align-content: space-around;
         }
     
         /* Input fields and select elements */
@@ -64,16 +71,7 @@
         button:hover {
             background-color: #1e5faa; /* Darker shade on hover */
         }
-    
-        /* Back link styling */
-        a {
-            display: block; /* Block display for spacing */
-            text-align: center; /* Center link */
-            margin-top: 10px; /* Space above link */
-            color: #2874d1; /* Primary color */
-            text-decoration: none; /* No underline */
-            font-size: 14px; /* Smaller font size */
-        }
+
     
         /* Back link hover effect */
         a:hover {
@@ -83,9 +81,31 @@
     
 </head>
 <body>
-    <div class="container">
-    <h2>Edit Bus</h2>
-    <form method="post" >
+    <!-- Side Navigation -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <img src="{% static 'images/logo.png' %}" alt="Logo" style="width: 100px; height: 100px; border-radius: 50%;">
+        </div>
+        <a href="{% url 'dashboard' %}"><i class="fa fa-fw fa-tachometer"></i> Dashboard</a>
+        <a href="{% url 'bus_list' %}"><i class="fa fa-fw fa-bus"></i> Buses</a>
+        <a href="{% url 'employee_list' %}"><i class="fa fa-fw fa-users"></i> Employees</a>
+        <a href="{% url 'schedule_list' %}"><i class="fa fa-fw fa-calendar"></i> Schedules</a>
+        <a href="{% url 'repair_list' %}"><i class="fa fa-fw fa-wrench"></i> Repairs</a>
+        <a href="{% url 'profile' %}"><i class="fa fa-fw fa-user"></i> Profile</a>
+        <a href="{% url 'logout' %}"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
+    </div>
+
+    <!-- Navbar Section -->
+    <div class="navbar">
+        <span class="open-nav-btn" onclick="openNav()">&#9776;</span>
+        <h2>Bus Management System</h2>
+        <p>Welcome, <strong>{{ user.first_name|default:user.username }}</strong></p>
+    </div>
+
+    
+    <form method="post" id="main" >
+        <h2>Edit Bus</h2>
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Save Changes</button>

@@ -32,7 +32,7 @@
     <div class="navbar">
         <span class="open-nav-btn" onclick="openNav()">&#9776;</span>
         <h2>Bus Management System</h2>
-        <p>Welcome, {{ user.first_name|default:user.username }}</p>
+        <p>Welcome, <strong>{{ user.first_name|default:user.username }}</strong></p>
     </div>
 
     <!-- Main Content -->
@@ -101,7 +101,7 @@
             </thead>
             <tbody>
                 {% for schedule in schedules %}
-                    <tr class="{% if schedule.employee and schedule.employee.status == 'inactive'  %}inactive {% endif %}">
+                    <tr class="{% if schedule.employee and schedule.employee.status == 'inactive' %}inactive  {% endif %}"></tr>
                         <td>{{ schedule.bus.plate_number }}</td>
                         <td>
                             {% if schedule.employee is None %}
@@ -117,13 +117,13 @@
                         <td><span class="status {{ schedule.get_status_display | lower}}">{{ schedule.get_status_display }}</span></td>
                         <td>
                             {% if schedule.departure_time is None %}
-                                <button>
-                                    <a href="{% url 'start_schedule' schedule.sched_id %}" class="btn btn-primary">Start</a>
-                                </button>
+                                <!-- <button> -->
+                                    <a href="{% url 'start_schedule' schedule.sched_id %}" class="btn btn-primary startstop">Start</a>
+                                <!-- </button> -->
                             {% else %}
-                                <button>
-                                    <a href="{% url 'stop_schedule' schedule.sched_id %}" class="btn btn-danger">Stop</a>
-                                </button>
+                                <!-- <button> -->
+                                    <a href="{% url 'stop_schedule' schedule.sched_id %}" class="btn btn-danger startstop" >Stop</a>
+                                <!-- </button> -->
                             {% endif %}
                             <a href="{% url 'schedule_history' schedule.sched_id %}" class="btn btn-info">History</a>
                             <a href="{% url 'edit_schedule' schedule.sched_id %}" class="btn btn-warning">Edit</a>

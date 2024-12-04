@@ -32,7 +32,7 @@
     <div class="navbar">
         <span class="open-nav-btn" onclick="openNav()">&#9776;</span>
         <h2>Bus Management System</h2>
-        <p>Welcome, {{ user.first_name|default:user.username }}</p>
+        <p>Welcome, <strong>{{ user.first_name|default:user.username }}</strong></p>
     </div>
 
     <!-- Main Content -->
