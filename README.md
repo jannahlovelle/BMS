@@ -9,38 +9,28 @@
     <strong>A modern solution for bus company administration, designed exclusively for administrators to manage operations efficiently.</strong>
 </p>
 
-## Table of Contents
 
-1. [Project Description](#project-description)
-2. [Features Overview](#features-overview)
-   - [Bus Management](#bus-management)
-   - [Schedule Management](#schedule-management)
-   - [Repair & Maintenance Tracking](#repair-maintenance-tracking)
-   - [Employee Management](#employee-management)
-3. [Why Choose This System?](#why-choose-this-system)
-4. [System Workflow](#system-workflow)
-   - [How to Use](#how-to-use)
-   - [System Modules](#system-modules)
-5. [Technologies Used](#technologies-used)
-6. [Setup Instructions](#setup-instructions)
-   - [Step 1: Clone the Repository](#step-1-clone-the-repository)
-   - [Step 2: Set Up the Virtual Environment](#step-2-set-up-the-virtual-environment)
-   - [Step 3: Install Dependencies](#step-3-install-dependencies)
-   - [Step 4: Configure the Database](#step-4-configure-the-database)
-   - [Step 5: Run the Development Server](#step-5-run-the-development-server)
-7. [Contributors](#contributors)
-8. [Useful Links](#useful-links)
-9. [License](#license)
 
+## 📑 Table of Contents
+
+- [**Project Description**](#project-description)  
+- [**Features**](#features)  
+- [**Why Choose This System?**](#why-choose-this-system)  
+- [**System Workflow**](#system-workflow)  
+- [**Technologies Used**](#technologies-used)  
+- [**Setup Instructions**](#setup-instructions)  
+- [**Contributors**](#contributors)  
+- [**Useful Links**](#useful-links)  
+- [**License**](#license)
 ---
 
-## Project Description
+## 📋 Project Description
 
 The **Bus Management System (BMS)** is a comprehensive web application developed specifically for bus company administrators. It simplifies the management of various aspects, including bus operations, schedules, maintenance, and employee management. This system acts as a digital assistant, automating tasks and providing an intuitive platform to ensure smooth and efficient operation of the bus services.
 
 ---
 
-## Features Overview
+## 🚀 Features Overview
 
 ### Bus Management
 This module allows administrators to manage bus-related data effectively. Administrators can add, update, and delete bus information such as bus capacity, type, registration details, and more. It provides a centralized view of all buses, helping the admin to keep track of their statuses, including whether they are available, in maintenance, or otherwise occupied.
@@ -56,7 +46,7 @@ This module handles the management of driver and maintenance staff records. Admi
 
 ---
 
-## Why Choose This System?
+## 💡 Why Choose This System?
 
 The Bus Management System offers a streamlined, user-friendly interface that reduces the administrative burden while improving overall operational efficiency. 
 
@@ -67,7 +57,7 @@ The Bus Management System offers a streamlined, user-friendly interface that red
 
 ---
 
-## System Workflow
+## 📊 System Workflow
 
 ### How to Use:
 
@@ -98,7 +88,7 @@ The Bus Management System offers a streamlined, user-friendly interface that red
 
 ---
 
-## Setup Instructions
+## ⚙️ Setup Instructions
 
 ### Step 1: Clone the Repository
 
@@ -156,7 +146,7 @@ http://127.0.0.1:8000/
 ```
 ---
 
-## Contributors
+## 👥 Contributors
 - **Sendrijas, Jannah Lovelle B.**
 - **Gare, Ragelo John C.**
 - **Regis, John Lawrence C.**
@@ -165,9 +155,9 @@ http://127.0.0.1:8000/
 
 ## Useful Links
 
-- **Gantt Chart**: [View here](https://cebuinstituteoftechnology-my.sharepoint.com/:x:/g/personal/johnlawrence_regis_cit_edu/EaQFBi_0vrVApMQGTguHb4ABAIY7ljqNPlHHa-oEgpGOTw?e=JrbJSy)
-- **ERD**: [View here](https://online.visual-paradigm.com/share.jsp?id=333535313134392d31)
-- **Figma Design**: [View here](https://www.figma.com/design/M2ifVE4d2JDDvvrJLUig13/Bus-Management-System?node-id=0-1&node-type=canvas)
+- 📅 Gantt Chart**: [View here](https://cebuinstituteoftechnology-my.sharepoint.com/:x:/g/personal/johnlawrence_regis_cit_edu/EaQFBi_0vrVApMQGTguHb4ABAIY7ljqNPlHHa-oEgpGOTw?e=JrbJSy)
+- 🗄️ ERD**: [View here](https://online.visual-paradigm.com/share.jsp?id=333535313134392d31)
+- 🎨 Figma Design**: [View here](https://www.figma.com/design/M2ifVE4d2JDDvvrJLUig13/Bus-Management-System?node-id=0-1&node-type=canvas)
 
 ---
 
