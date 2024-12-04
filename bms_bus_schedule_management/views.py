@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from bms_bus_schedule_management.forms import ScheduleForm
 from bms_bus_schedule_management.models import Schedule
 from django.core.paginator import Paginator
+from bms_bus_information_management.models import Bus
+from bms_bus_schedule_management.models import Employee
 
 # Create your views here.
 @login_required

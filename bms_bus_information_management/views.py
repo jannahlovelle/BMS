@@ -26,7 +26,7 @@ def add_bus(request):
     else:
         form = BusForm()
 
-    return render(request, 'bms_bus_information_management/add_bus.html', {'form': form})
+    return render(request, 'bms_bus_information_management/home_page.html', {'form': form})
 
 
 @login_required
