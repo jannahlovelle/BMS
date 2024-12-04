@@ -112,7 +112,7 @@ body {
 
 /* Status styles */
 .status.transit {
-    color: green;
+    color: #EBAA04;
     font-weight: bold;
 }
 
@@ -122,7 +122,7 @@ body {
 }
 
 .status.standby {
-    color: #EBAA04;
+    color: green;
     font-weight: bold;
 }
 

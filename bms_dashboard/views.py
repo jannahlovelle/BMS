@@ -39,7 +39,7 @@ def dashboard(request):
 @csrf_exempt
 def get_bus_data(request):
     user = request.user
-    available_buses = Bus.objects.filter(user=user, status='On Standby').count()
+    available_buses = Bus.objects.filter(user=user, status='on_standby').count()
     buses_in_operation = Bus.objects.filter(user=user, status='in_transit').count()
     buses_under_maintenance = Bus.objects.filter(user=user, status='under_maintenance').count()
 
