@@ -1,72 +1,101 @@
-# 🚌 Bus Management System - CSIT327 G5
+<h1 align="center">
+    <img src="AMSystem/static/images/AMSystemlogo-dark.png#gh-light-mode-only" alt="AMSystem Logo Light" width="200"/>
+    <img src="AMSystem/static/images/AMSystemlogo-light.png#gh-dark-mode-only" alt="AMSystem Logo Dark" width="200"/>
+    <br>
+    🚌 Bus Management System - CSIT327 G5
+</h1>
 
-## **Project Description**
-
-The **Bus Management System** is a web application built to help bus company managers (admins) easily take care of everything related to buses, schedules, repairs, and employees. It’s like a digital assistant for managing all aspects of running a bus service, making things simpler and faster.
-
----
-
-## **What does it do?**
-
-Imagine running a bus company with a fleet of buses, drivers, and schedules to manage. Without the right tools, it can become very messy and hard to keep track of everything. This system is designed to make that easier.
-
-### **Key Features**
-- **Manage Buses**: You can add new buses, update their details (like capacity, type, and registration numbers), and remove buses when needed. Everything about each bus is neatly organized in one place.
-- **Create and Manage Schedules**: You can set up schedules for when buses should leave and arrive at different locations. This helps make sure that buses are on time and that routes are planned efficiently.
-- **Keep Track of Repairs**: The system helps keep a record of any repairs or maintenance done on the buses. This way, you’ll always know if a bus is in good shape or needs fixing, helping to avoid breakdowns and accidents.
-- **Employee Management**: You can add and manage employee details, including drivers and maintenance workers. This makes it easy to keep track of who is working when and what their responsibilities are.
+<p align="center">
+    <strong>A modern solution for bus company administration — <em>designed exclusively for admins</em>.</strong>
+</p>
 
 ---
 
-## **Why is this system useful?**
+## 📋 **Project Description**
 
-This system makes running a bus company much easier and more organized. Without it, managing all the information on buses, drivers, and schedules could get really complicated, especially as the business grows. Here’s why the system is helpful:
-
-- **Everything in One Place**: You don’t need to flip through papers or spreadsheets to find information. Everything is stored and updated in the system.
-- **Easy to Use**: The system is designed to be user-friendly, so you don’t need to be a tech expert to use it. It’s easy to navigate, and all tasks can be completed with just a few clicks.
-- **Keeps Things Organized**: You can track all the details of buses, schedules, repairs, and employees in an organized way, helping to avoid confusion or mistakes.
-- **Save Time**: Instead of manually updating records or trying to remember when a bus is due for repairs, the system automates everything. It makes managing the buses faster and more efficient.
+The **Bus Management System (BMS)** is a robust web application tailored for bus company administrators to efficiently manage buses, schedules, repairs, and employees. It acts as a digital assistant, streamlining all operations necessary for running a smooth and organized bus service.
 
 ---
 
-## **Why Use This System?**
+## 🚀 **Features Overview**
 
-- If you run a bus company and want to keep track of everything without the stress, this system is perfect.
-- It's a **one-stop-shop** for managing your fleet, employees, and schedules, so you don’t have to worry about losing track of important details.
-- It helps you make better decisions, like when to fix buses, which buses are most used, and when to hire more drivers or staff.
+### 🚌 **Bus Management**
+- Add, update, and delete bus information (e.g., capacity, type, registration).
+- Keep track of bus statuses in a centralized dashboard.
+
+### 📅 **Schedule Management**
+- Set up and edit bus schedules.
+- Ensure routes and timings are optimized for efficiency.
+
+### 🛠️ **Repair & Maintenance Tracking**
+- Log and monitor maintenance or repair activities.
+- Ensure buses are always in top condition to avoid delays or accidents.
+
+### 👨‍💼 **Employee Management**
+- Manage driver and maintenance staff records.
+- Assign responsibilities and track work schedules.
 
 ---
 
-In simple terms, this system helps you keep everything under control, making sure the buses run smoothly, employees are organized, and everything is done on time.
+## 💡 **Why Choose This System?**
 
+This system simplifies bus management, offering a user-friendly experience that reduces administrative workload while improving overall efficiency.
 
+- 📂 **Centralized Data**: Manage everything from buses to employees in one place.
+- ⚡ **Efficiency at Its Best**: Automates repetitive tasks, saving time and effort.
+- 🎯 **Organized Workflow**: Ensures everything is logged and easily accessible for admins.
+- 🛡️ **Improved Decision-Making**: Get insights into bus usage, repair needs, and employee performance.
 
+---
 
-members:
-Sendrijas, Jannah Lovelle B. 
-Gare, Ragelo John C.
-Regis, John Lawrence C.
+## 📖 **How It Works**
 
-## 👨‍💻 Contributors
-## 💻 Languages Used
+1. **Log in as an Admin**: Access the system securely with admin credentials.
+2. **Navigate Through the Dashboard**: Use an intuitive interface to manage various modules.
+3. **Update, Add, or Remove Data**: Make real-time changes to buses, schedules, repairs, or employees.
+4. **Stay Updated**: Track repairs, optimize schedules, and ensure smooth operations.
 
+---
+
+## 🛠️ **Technologies Used**
+
+### **Languages**
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
+### **Frameworks**
+- **Django**: Backend framework for building scalable web applications.
 
-                           |
+---
 
+## 👥 **Contributors**
+- **Sendrijas, Jannah Lovelle B.**
+- **Gare, Ragelo John C.**
+- **Regis, John Lawrence C.**
 
+---
 
+## 🔗 **Useful Links**
 
+- 📅 **Gantt Chart**: [View here](https://cebuinstituteoftechnology-my.sharepoint.com/:x:/g/personal/johnlawrence_regis_cit_edu/EaQFBi_0vrVApMQGTguHb4ABAIY7ljqNPlHHa-oEgpGOTw?e=JrbJSy)
+- 🛠️ **ERD**: [View here](https://online.visual-paradigm.com/share.jsp?id=333535313134392d31)
+- 🎨 **Figma Design**: [View here](https://www.figma.com/design/M2ifVE4d2JDDvvrJLUig13/Bus-Management-System?node-id=0-1&node-type=canvas)
 
-link to our gantt chart:
-https://cebuinstituteoftechnology-my.sharepoint.com/:x:/g/personal/johnlawrence_regis_cit_edu/EaQFBi_0vrVApMQGTguHb4ABAIY7ljqNPlHHa-oEgpGOTw?e=JrbJSy
+---
 
-link to our ERD:
-https://online.visual-paradigm.com/share.jsp?id=333535313134392d31
+## 📸 **Preview**
 
-link to our figma:
-https://www.figma.com/design/M2ifVE4d2JDDvvrJLUig13/Bus-Management-System?node-id=0-1&node-type=canvas
+> Add a screenshot of your system's dashboard or key features here for a better visual representation.
+
+---
+
+## 📝 **License**
+This project is for academic purposes only under the guidance of **CSIT327 Group 5**.
+
+---
+
+<p align="center">
+✨ Built with dedication by Group 5 ✨
+</p>
