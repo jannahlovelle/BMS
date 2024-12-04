@@ -39,47 +39,59 @@
         <h1>Schedule List</h1>
         <!-- Add Button -->
         <button id="openModalBtn" class="add-btn">Add New Schedule +</button>
-    <!-- Modal for Adding a Schedule -->
-    <div id="addScheduleModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeModalBtn">&times;</span>
-            <h2>Add New Schedule</h2>
-            <form action="{% url 'add_schedule' %}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="bus">Bus</label>
-                    <select id="bus" name="bus">
-                        <option value="" disabled selected>Select a Bus</option>
-                        {% for bus in buses %}
-                            <option value="{{ bus.bus_id }}">{{ bus.plate_number }} - {{ bus.model }}</option>
-                        <option value="{{ bus.bus_id }}">{{ bus.plate_number }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="employee">Employee</label>
-                    <select id="employee" name="employee">
-                        <option value="" disabled selected>Select an Employee</option>
-                        {% for employee in employees %}
-                            <option value="{{ employee.employee_id }}">{{ employee.first_name }} {{ employee.last_name }}</option>
-                        <option value="{{ employee.employee_id }}">{{ employee.first_name }} {{ employee.last_name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="route">Route</label>
-                    <input type="text" id="route" name="route" value="{{ route}}" required>
-                </div>
-                <div class="form-group">
-                    <label for="notes">Notes</label>
-                    <textarea id="notes" name="notes" rows="4" placeholder="Add any additional information here..." value="{{ notes }}"></textarea>
-                </div>
 
-                <button type="submit" class="save-btn btn">Save Schedule</button>
-            </form>
+        <!-- Modal for Adding a Schedule -->
+        <div id="addScheduleModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" id="closeModalBtn">&times;</span>
+                <h2>Add New Schedule</h2>
+                <form action="{% url 'add_schedule' %}" method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label for="bus">Bus</label>
+                        {{ form.bus }}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="employee">Employee</label>
+                        {{ form.employee }}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="route">Route</label>
+                        {{ form.route }}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="departure_time">Departure Time</label>
+                        {{ form.departure_time }}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="arrival_time">Arrival Time</label>
+                        {{ form.arrival_time }}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        {{ form.status }}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="frequency">Frequency</label>
+                        {{ form.frequency }}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="notes">Notes</label>
+                        {{ form.notes }}
+                    </div>
+                    
+                    <button type="submit" class="save-btn btn">Save Schedule</button>
+                </form>
+            </div>
         </div>
-    </div>
-    
 
         <table class="bus-table">
             <thead>
@@ -125,7 +137,7 @@
                             <a href="{% url 'delete_schedule' schedule.sched_id %}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
-                    {% empty %}
+                {% empty %}
                     <tr>
                         <td colspan="8">No schedules found.</td>
                     </tr>
@@ -142,27 +154,19 @@
     const closeModalBtn = document.getElementById('closeModalBtn');
 
     // Open the modal
-    document.getElementById("openModalBtn").addEventListener("click", function () {
-        document.getElementById("addScheduleModal").style.display = "block";
+    openModalBtn.addEventListener("click", function () {
+        modal.style.display = "block";
     });
 
     // Close the modal
-    document.getElementById("closeModalBtn").addEventListener("click", function () {
-        document.getElementById("addScheduleModal").style.display = "none";
+    closeModalBtn.addEventListener("click", function () {
+        modal.style.display = "none";
     });
 
     // Close modal when clicking outside of it
     window.addEventListener("click", function (event) {
-        const modal = document.getElementById("addScheduleModal");
         if (event.target === modal) {
             modal.style.display = "none";
         }
-    });
-
-    document.getElementById("openModalBtn").addEventListener("click", function () {
-        console.log('Opening modal with buses and employees data:');
-        console.log(buses);  // This will check if buses are available to JS
-        console.log(employees);  // This will check if employees are available to JS
-        document.getElementById("addScheduleModal").style.display = "block";
     });
 </script>

@@ -25,7 +25,7 @@ def add_schedule(request):
             form.save()  # Save the schedule with the selected bus
             return redirect('schedule_list')  # Redirect after saving
         else:
-            print(form.errors)  # Debugging
+            print("Form errors:",form.errors)  # Debugging
     else:
         
         form = ScheduleForm()  # Initialize form without user context
@@ -56,7 +56,7 @@ def delete_schedule(request, sched_id):
     return render(request, 'bms_bus_schedule_management/confirm_delete_schedule.html', {'object': schedule})
 
 def schedule_list(request):
-    schedules = Schedule.objects.filter(bus__user=request.user)  # Fetch schedules
+    schedules = Schedule.objects.all()  # Filter schedules by user
     buses = Bus.objects.filter(user=request.user)  # Fetch buses
     employees = Employee.objects.filter(user=request.user)  # Fetch employees filtered by user
     form = ScheduleForm()  # Initialize your form
