@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from bms_bus_information_management.models import Bus
 from bms_user_authentication.forms import LoginForm, UserPasswordChangeForm, UserProfileForm
 from bms_user_authentication.models import UserProfile
+from django.contrib import messages
 
 # Create your views here.
 
@@ -30,19 +31,21 @@ def user_logout(request):
 def profile(request):
     user_profile, created = UserProfile.objects.get_or_create(user=request.user)
 
-    if request.method == 'POST' and 'update_profile' in request.POST:
-        user_form = UserProfileForm(request.POST, instance=request.user)
+    if request.method == 'POST':
+        user_form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
         if user_form.is_valid():
             user_form.save()
+            messages.success(request, 'Your profile was successfully updated!')
             return redirect('profile')
+        else:
+            messages.error(request, 'Please correct the error below.')
     else:
-        user_form = UserProfileForm(instance=request.user)
+        user_form = UserProfileForm(instance=user_profile)
 
     return render(request, 'profile.html', {
         'user_form': user_form,
         'profile': user_profile
     })
-
 @login_required
 def change_password(request):
     if request.method == 'POST':

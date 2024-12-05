@@ -32,7 +32,15 @@
     <div class="navbar">
         <span class="open-nav-btn" onclick="openNav()">&#9776;</span>
         <h2>Bus Management System</h2>
-        <p>Welcome, <strong>{{ user.first_name|default:user.username }}</strong></p>
+        <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+            {% if profile.profile_picture %}  
+                <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+            {% else %}
+                <img src="{% static 'images/default.jpg' %}" alt="Default Profile Picture" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+            {% endif %}
+               <p>Welcome, <strong>{{ user.first_name|default:user.username }}</strong></p>
+            </div>
+        </div>
     </div>
     <!-- Main Content -->
     <div id="main" class="container">

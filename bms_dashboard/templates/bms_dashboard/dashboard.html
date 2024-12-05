@@ -43,7 +43,15 @@
     <div class="navbar">
         <span class="open-nav-btn" onclick="openNav()">&#9776;</span>
         <h2>Bus Management System</h2>
-        <p>Welcome, <strong>{{ user.first_name|default:user.username }}</strong></p>
+        <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+            {% if profile.profile_picture %}  
+                <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+            {% else %}
+                <img src="{% static 'images/default.jpg' %}" alt="Default Profile Picture" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+            {% endif %}
+               <p>Welcome, <strong>{{ user.first_name|default:user.username }}</strong></p>
+            </div>
+        </div>
     </div>
 
     
@@ -168,42 +176,44 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            fetch("{% url 'get_bus_schedule_history' %}")
-                .then(response => response.json())
-                .then(data => {
-                    const ctx = document.getElementById('scheduleHistoryChart').getContext('2d');
-                    const labels = data.schedule_history.map(item => item.schedule__route);
-                    const counts = data.schedule_history.map(item => item.count);
-
-                    new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'Schedule History Count',
-                                data: counts,
-                                backgroundColor: '#4CAF50'
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            scales: {
-                                x: {
-                                    title: {
-                                        display: true,
-                                        text: 'Route'
-                                    }
+                    fetch("{% url 'get_bus_schedule_history' %}")
+                        .then(response => response.json())
+                        .then(data => {
+                            const ctx = document.getElementById('scheduleHistoryChart').getContext('2d');
+                            const labels = data.schedule_history.map(item => item.schedule__route);
+                            const counts = data.schedule_history.map(item => item.count);
+            
+                            new Chart(ctx, {
+                                type: 'doughnut',
+                                data: {
+                                    labels: labels,
+                                    datasets: [{
+                                        label: 'Schedule History Count',
+                                        data: counts,
+                                        backgroundColor: [
+                                            '#4CAF50', '#FFC107', '#F44336', '#2196F3', '#FF5722', '#9C27B0', '#3F51B5', '#00BCD4', '#8BC34A', '#FFEB3B'
+                                        ]
+                                    }]
                                 },
-                                y: {
-                                    title: {
-                                        display: true,
-                                        text: 'Count'
+                                options: {
+                                    responsive: true,
+                                    plugins: {
+                                        legend: {
+                                            position: 'top',
+                                        },
+                                        title: {
+                                            display: true,
+                                            text: 'Schedule History Count'
+                                        }
                                     }
                                 }
-                            }
-                        }
-                    });
-                });
+                            });
+                        })
+                        .catch(error => {
+                            console.error('There was a problem with the fetch operation:', error);
+                            document.getElementById('scheduleHistoryChart').parentNode.innerHTML = '<h3>Schedule History Count</h3><br><p>Error loading data.</p>';
+                        });
+        
         });
     </script>
 
