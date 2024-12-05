@@ -70,7 +70,7 @@ def get_employee_data(request):
 @csrf_exempt
 def get_bus_schedule_history(request):
     user = request.user
-    schedule_history = ScheduleHistory.objects.filter(schedule__bus__user=user).values('schedule__bus__plate_number', 'schedule__id').annotate(count=Count('id')).order_by('schedule__bus__plate_number', 'schedule__id')
+    schedule_history = ScheduleHistory.objects.filter(schedule__bus__user=user).values('schedule__route').annotate(count=Count('schedule_id')).order_by('schedule__route')
 
     data = {
         'schedule_history': list(schedule_history)

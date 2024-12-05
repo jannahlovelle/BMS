@@ -94,7 +94,7 @@ def stop_schedule(request, sched_id):
     if schedule.departure_time is not None and schedule.arrival_time is None:
         schedule.arrival_time = timezone.now()
         schedule.status = 'arrived'
-        schedule.bus.status = 'On Standby'
+        schedule.bus.status = 'on_standby'
         schedule.save()
         schedule.bus.save()
         schedule.departure_time = None

@@ -101,7 +101,7 @@
             </thead>
             <tbody>
                 {% for schedule in schedules %}
-                    <tr class="{% if schedule.employee and schedule.employee.status == 'inactive' %}inactive{% endif %}">
+                    <tr class="{% if schedule.employee and schedule.employee.status == 'inactive' %}inactive {% elif schedule.bus and schedule.bus.status == 'under_maintenance'%} inactive {% endif %}">
                         <td>{{ schedule.bus.plate_number }}</td>
                         <td>
                             {% if schedule.employee is None %}

@@ -63,7 +63,13 @@
                     <h3>Employee Analytics</h3>
                     <canvas id="Employeechart"></canvas>
                  </div>
-                
+            </div>
+            <div class="metric">
+                <!-- Chart container for Schedule History -->
+                <div>
+                    <h3>Schedule History Count</h3>
+                    <canvas id="scheduleHistoryChart"></canvas>
+                </div>
             </div>
             <div class="metric">
                 <div class="recent-activities">
@@ -166,27 +172,32 @@
                 .then(response => response.json())
                 .then(data => {
                     const ctx = document.getElementById('scheduleHistoryChart').getContext('2d');
-                    const labels = data.schedule_history.map(item => item.updated_at);
+                    const labels = data.schedule_history.map(item => item.schedule__route);
                     const counts = data.schedule_history.map(item => item.count);
 
                     new Chart(ctx, {
-                        type: 'line',
+                        type: 'bar',
                         data: {
                             labels: labels,
                             datasets: [{
-                                label: 'Bus Schedule History Count',
+                                label: 'Schedule History Count',
                                 data: counts,
-                                borderColor: '#4CAF50',
-                                fill: false
+                                backgroundColor: '#4CAF50'
                             }]
                         },
                         options: {
                             responsive: true,
                             scales: {
                                 x: {
-                                    type: 'time',
-                                    time: {
-                                        unit: 'day'
+                                    title: {
+                                        display: true,
+                                        text: 'Route'
+                                    }
+                                },
+                                y: {
+                                    title: {
+                                        display: true,
+                                        text: 'Count'
                                     }
                                 }
                             }
