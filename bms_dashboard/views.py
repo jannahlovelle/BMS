@@ -20,9 +20,18 @@ def dashboard(request):
     recent_activities = [
         "Bus {} added".format(bus.plate_number) for bus in Bus.objects.filter(user=user).order_by('bus_id')[:5]
     ]
-    notifications = [
-        "Maintenance due for Bus {}".format(bus.plate_number) for bus in Bus.objects.filter(user=user, status='Maintenance Due')
+    recently_deleted_buses = [
+        "Bus {} deleted".format(bus.plate_number) for bus in Bus.objects.filter(user=user, status='deleted').order_by('bus_id')[:5]
     ]
+    recent_activities.extend(recently_deleted_buses)
+    other_activities = [
+        "Employee {} {} added".format(employee.first_name, employee.last_name) for employee in Employee.objects.filter(user=user).order_by('employee_id')[:5]
+    ]
+    recent_activities.extend(other_activities)
+    recently_added_repairs = [
+        "Bus {} repaired".format(bus.plate_number) for bus in Bus.objects.filter(user=user, status='repaired').order_by('bus_id')[:5]
+    ]
+    recent_activities.extend(recently_added_repairs)
     
     context = {
         'total_buses': total_buses,
@@ -30,7 +39,6 @@ def dashboard(request):
         'buses_in_operation': buses_in_operation,
         'buses_under_maintenance': buses_under_maintenance,
         'recent_activities': recent_activities,
-        'notifications': notifications,
     }
     
     return render(request, 'bms_dashboard/dashboard.html', context)

@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
-
+from django.utils import timezone
+from bms_bus_schedule_management.models import Schedule
 from bms_maintenancerepair_management.forms import RepairForm
 from bms_maintenancerepair_management.models import Repair
 from bms_bus_information_management.models import Bus
@@ -7,27 +8,33 @@ from bms_driversworkers_management.models import Employee
 
 # Create your views here.
 def add_repair(request):
-
     if request.method == 'POST':
         form = RepairForm(request.POST, user=request.user)
         if form.is_valid():
             repair = form.save(commit=False)
-            repair.status ='under_maintenance'
+            repair.status = 'under_maintenance'
             repair.save()
 
             bus = repair.bus
             bus.status = 'under_maintenance'
             bus.save()
 
+            # Check if the bus is in a schedule and stop the schedule
+            schedule = Schedule.objects.filter(bus=bus, status__in=['in_transit', 'on_standby']).first()
+            if schedule:
+                schedule.status = 'cancelled'
+                schedule.arrival_time = timezone.now()
+                schedule.save()
+
             return redirect('repair_list')  # Replace with your redirect URL
         else:
             print(form.errors)  # Debugging
     else:
         form = RepairForm(user=request.user)
-        
-    buses = Bus.objects.filter(user=request.user)  # Fetch buses
+    
+    buses = Bus.objects.filter(owner=request.user)  # Fetch buses
     employees = Employee.objects.filter(user=request.user)
-
+    
     return render(request, 'bms_maintenancerepair_management/home_page_repair.html', {
         'form': form,
         'buses': buses,
