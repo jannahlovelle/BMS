@@ -4,95 +4,122 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Employee</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidenav.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
     <style>
-        /* General styles for the page */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 10px; /* Reduced padding */
-            background-color: #f0f4f8; /* Light background */
+            padding: 0;
+            background-color: #f0f4f8;
         }
-    
-        /* Container for the form */
+
         .container {
-            max-width: 500px; /* Limit the width of the form */
-            margin: 0 auto; /* Center the container */
-            padding: 15px; /* Padding for the container */
-            background-color: #ffffff; /* White background for the form */
-            border-radius: 8px; /* Rounded corners */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-    
-        /* Heading styles */
+
         h1, h2 {
-            text-align: center; /* Centered heading */
-            color: #333; /* Dark text color */
-            margin-bottom: 10px; /* Reduced space below heading */
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
         }
-    
-        /* Styles for form elements */
+
         form {
             display: flex;
-            flex-direction: column; /* Stack elements vertically */
+            flex-direction: column;
+            padding: 15px;
         }
-    
-        /* Input fields and select elements */
+
         input[type="text"],
         input[type="email"],
         input[type="tel"],
         input[type="file"],
         select,
         textarea {
-            margin: 5px 0; /* Reduced space between inputs */
-            padding: 8px; /* Reduced padding */
-            border: 1px solid #ddd; /* Light gray border */
-            border-radius: 4px; /* Rounded corners */
-            font-size: 14px; /* Smaller font size */
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
         }
-    
-        /* Button styles */
+
         button {
-            padding: 8px 12px; /* Reduced button padding */
-            background-color: #2874d1; /* Primary color */
-            color: white; /* White text color */
-            border: none; /* No border */
-            border-radius: 4px; /* Rounded corners */
-            cursor: pointer; /* Pointer cursor */
-            font-size: 14px; /* Smaller font size */
-            margin-top: 10px; /* Space above the button */
+            padding: 10px;
+            background-color: #2874d1;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
         }
-    
-        /* Button hover effect */
+
         button:hover {
-            background-color: #1e5faa; /* Darker shade on hover */
+            background-color: #1e5faa;
         }
-    
-        /* Back link styling */
+
         a {
-            display: block; /* Block display for spacing */
-            text-align: center; /* Center link */
-            margin-top: 10px; /* Space above link */
-            color: #2874d1; /* Primary color */
-            text-decoration: none; /* No underline */
-            font-size: 14px; /* Smaller font size */
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #2874d1;
+            text-decoration: none;
+            font-size: 16px;
         }
-    
-        /* Back link hover effect */
+
         a:hover {
-            text-decoration: underline; /* Underline on hover */
+            text-decoration: underline;
         }
     </style>
-    
 </head>
 <body>
+    <!-- Side Navigation -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <img src="{% static 'images/logo.png' %}" alt="Logo" style="width: 100px; height: 100px; border-radius: 50%;">
+        </div>
+        <a href="{% url 'dashboard' %}"><i class="fa fa-fw fa-tachometer"></i> Dashboard</a>
+        <a href="{% url 'bus_list' %}"><i class="fa fa-fw fa-bus"></i> Buses</a>
+        <a href="{% url 'employee_list' %}"><i class="fa fa-fw fa-users"></i> Employees</a>
+        <a href="{% url 'schedule_list' %}"><i class="fa fa-fw fa-calendar"></i> Schedules</a>
+        <a href="{% url 'repair_list' %}"><i class="fa fa-fw fa-wrench"></i> Repairs</a>
+        <a href="{% url 'profile' %}"><i class="fa fa-fw fa-user"></i> Profile</a>
+        <a href="{% url 'logout' %}"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
+    </div>
+
+    <!-- Navbar Section -->
+    <div class="navbar">
+        <span class="open-nav-btn" onclick="openNav()">&#9776;</span>
+        <h2>Bus Management System</h2>
+        <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+            {% if profile.profile_picture %}  
+                <img src="{{ user.profile_picture.url }}" alt="Profile Picture" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+            {% else %}
+                <img src="{% static 'images/default.jpg' %}" alt="Default Profile Picture" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+            {% endif %}
+               <p>Welcome, <strong>{{ user.first_name|default:user.username }}</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Container -->
     <div class="container">
-    <h1>Edit Employee</h1>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save Changes</button>
-    </form>
-    <a href="{% url 'employee_list' %}">Cancel</a>
+        <h1>Edit Employee</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save Changes</button>
+        </form>
+        <a href="{% url 'employee_list' %}">Cancel</a>
     </div>
 </body>
 </html>

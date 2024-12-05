@@ -56,8 +56,8 @@ def schedule_list(request):
     schedules = Schedule.objects.filter(bus__user=request.user)  # Fetch schedules
     buses = Bus.objects.filter(user=request.user)  # Fetch buses
     employees = Employee.objects.filter(user=request.user, status="active", job_title="driver")  # Fetch employees filtered by user
-    form = ScheduleForm()  # Initialize your form
 
+    form = ScheduleForm()  # Initialize your form=
     return render(request, 'bms_bus_schedule_management/home_page_schedule.html', {
         'schedules': schedules,
         'buses': buses,
@@ -69,7 +69,7 @@ def schedule_history(request, sched_id):
     schedule = get_object_or_404(Schedule, pk=sched_id)
     history = schedule.history.filter(bus__user=request.user).order_by('-updated_at')
     
-    paginator = Paginator(history, 15)  # Show 15 history records per page
+    paginator = Paginator(history, 5)  # Show 15 history records per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     

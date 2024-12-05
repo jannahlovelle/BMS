@@ -121,7 +121,7 @@ body {
     font-weight: bold;
 }
 
-.status.standby, .status.active {
+.status.standby, .status.active, .status.done {
     color: green;
     font-weight: bold;
 }

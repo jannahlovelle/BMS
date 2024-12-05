@@ -7,6 +7,7 @@ import logging
 from django.contrib.auth.decorators import login_required
 from bms_bus_information_management.models import Bus
 from django.http import JsonResponse
+from django.core.paginator import Paginator
 
 logger = logging.getLogger(__name__)
 # Create your views here.
@@ -53,4 +54,7 @@ def delete_bus(request, bus_id):
 @login_required
 def bus_list(request):
     buses = Bus.objects.filter(user=request.user)
+    paginator = Paginator(buses, 10)  # Show 10 buses per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     return render(request, 'bms_bus_information_management/home_page.html', {'buses': buses})
