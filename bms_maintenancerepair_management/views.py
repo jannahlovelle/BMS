@@ -11,7 +11,14 @@ def add_repair(request):
     if request.method == 'POST':
         form = RepairForm(request.POST, user=request.user)
         if form.is_valid():
-            form.save()
+            repair = form.save(commit=False)
+            repair.status ='under_maintenance'
+            repair.save()
+
+            bus = repair.bus
+            bus.status = 'under_maintenance'
+            bus.save()
+
             return redirect('repair_list')  # Replace with your redirect URL
         else:
             print(form.errors)  # Debugging

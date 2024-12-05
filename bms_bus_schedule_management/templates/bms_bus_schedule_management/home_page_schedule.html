@@ -101,7 +101,7 @@
             </thead>
             <tbody>
                 {% for schedule in schedules %}
-                    <tr class="{% if schedule.employee and schedule.employee.status == 'inactive' %}inactive  {% endif %}"></tr>
+                    <tr class="{% if schedule.employee and schedule.employee.status == 'inactive' %}inactive{% endif %}">
                         <td>{{ schedule.bus.plate_number }}</td>
                         <td>
                             {% if schedule.employee is None %}
@@ -114,23 +114,19 @@
                         <td>{{ schedule.route }}</td>
                         <td id="departure-time-{{ schedule.sched_id }}">{{ schedule.departure_time }}</td>
                         <td id="arrival-time-{{ schedule.sched_id }}">{{ schedule.arrival_time }}</td>
-                        <td><span class="status {{ schedule.get_status_display | lower}}">{{ schedule.get_status_display }}</span></td>
+                        <td><span class="status {{ schedule.get_status_display|lower }}">{{ schedule.get_status_display }}</span></td>
                         <td>
                             {% if schedule.departure_time is None %}
-                                <!-- <button> -->
-                                    <a href="{% url 'start_schedule' schedule.sched_id %}" class="btn btn-primary startstop">Start</a>
-                                <!-- </button> -->
+                                <a href="{% url 'start_schedule' schedule.sched_id %}" class="btn btn-primary startstop">Start</a>
                             {% else %}
-                                <!-- <button> -->
-                                    <a href="{% url 'stop_schedule' schedule.sched_id %}" class="btn btn-danger startstop" >Stop</a>
-                                <!-- </button> -->
+                                <a href="{% url 'stop_schedule' schedule.sched_id %}" class="btn btn-danger startstop">Stop</a>
                             {% endif %}
                             <a href="{% url 'schedule_history' schedule.sched_id %}" class="btn btn-info">History</a>
                             <a href="{% url 'edit_schedule' schedule.sched_id %}" class="btn btn-warning">Edit</a>
                             <a href="{% url 'delete_schedule' schedule.sched_id %}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
-                    {% empty %}
+                {% empty %}
                     <tr>
                         <td colspan="8">No schedules found.</td>
                     </tr>
